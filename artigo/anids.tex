@@ -1,0 +1,29 @@
+\chapter{Anomaly-based IDS}
+\label{anids}
+ A técnica de detecção de anomalia analisa o atual comportamento da rede para checar se corresponde ou não a um
+ comportamento normal. O maior benefício desse método é a habilidade de identificar novos ataques com sucesso.
+ A desvantagem é a alta taxa de Falso Positivo. Ao invés de requerer um novo modelo a ser adaptado, sistemas baseados
+ em anomalia necessitam de dados de tráfego de rede sem livres de ataques. \textit{Data mining} também tem sido
+ utilizado em sistemas baseados em anomalia, junto a outros métodos estatísticos e de \textit{Machine Learning}
+ (aprendizado de máquina).
+ \par As diferentes técnicas podem ser agrupadas em três categorias, de acordo com o processamento envolvido:
+ estatístico, knowledge-based (baseado em conhecimento) ou algoritmos de aprendizado de máquina.
+
+\section{Técinas Estatísticas}
+Um modelo de probabilidade de um determinado comportamento é criado a partir da atividade capturada do tráfego de rede,
+ tal como taxa de tráfego, número de pacotes e quantidade de endereços de IP distintos.
+ \par Ele não requer conehcimento prévio pois está capacitado a aprender o comportamento normal a partir de observações
+ sem ataques. Outro benefício das técnicas estatísticas é a possibilidade de identificar, com precisão, atividades
+ maliciosas que ocorrem ao longo de períodos de tempo mais extensos. Por outro lado, nem todos os possíveis
+ comportamentos conseguem ser modelados e o equilíbrio entre taxas de Falso Positivo e Falso Negativo dependem
+ fortemente na configuração correta dos parâmetros.
+
+ \section{Técnicas Baseadas em Conhecimento}
+ Também chamados de expert systems, sistemas baseados em conhecimento são implementados criando-se um conjunto de
+ regras de classificação para categorizar os dados. O modelo é geralmente criado por um humano experiente no campo
+ da aplicação. Esse tipo de sistema não aponta novas atividades inofensivas como sendo maliciosas, garantindo, assim,
+ um número reduzido de Falso Positivo. Por essa razão, o conjunto de regras precisa ser específico o suficiente e,
+ apesar de ser possível atingir um certo nível de automatização usando uma máquina de estados finitos, requer
+ grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
+
+ \section{Técnicas de Machine Learning}

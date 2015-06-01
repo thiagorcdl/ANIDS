@@ -1,0 +1,19 @@
+\chapter{Signature-based IDS}
+\label{snids}
+Apesar de não ser o foco deste artigo, vamos descrever brevemente os sistemas baseados em assinatura, a fim de
+comparação com os métodos nos quais vamos nos aprofundar.
+\par Sistemas baseados em assinatura têm sido os mais bem sucedidos para detecção de intrusão até hoje.
+A ideia é comparar o tráfego da rede com padrões de comportamento conhecidos durante certos ataques.
+O maior problema é a ineficiência em detectar ataques novos.
+\par Os primeiros sistemas utilizavam apenas o método de reconhecimento de padrão. Essa técnica possui um banco de dados
+ preenchido com assinaturas de cada ameaça conhecida. Um evento malicioso é detectado se o atual estado da rede se iguala
+ a uma assinatura. Como ele tenta comparar todas as assinaturas e a quantidade de dados transmitidos simultaneamente
+cresce a cada ano, o custo computacional tronou-se muito alto.
+\par Uma segunda técnica é o método de \textit{implication rules}, ou regras de inferência. Ela fornece um conjunto de
+regras que descrevem eventos conhecidos que podem inferir o acontecimento de um a intrusão. De qualquer modo, IDS de
+assinatura geralmente necessita de um humano capacitado, que cria um novo conjunto de regras toda vez que um novo
+tipo de ataque surge, para adquirir modelos de tráfego.
+\par Daí surge a motivação para se utilizar técnicas de \textit{data mining} em sistemas de assinatura. Elas provém um
+ modo de aumentar a automação na hora de construir e ajustar o modelo. Eles podem adaptar os modelos à medida que
+ acessam tráfego de rede contendo novas ameaças ou detectando diferentes versões de um ataque conhecido. Ainda assim,
+ é impossível identificar comportamentos maliciosos completamente desconhecidos.
