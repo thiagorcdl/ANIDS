@@ -1,0 +1,22 @@
+\chapter{Dados}
+\label{dados}
+
+\section{Pré-processamento}
+Como anteriormente apontado, sistemas baseados em anomalia estão sujeitos a uma alta taxa de Falso Positivo. Apenas
+1\% sequer de Falso Positivo resulta em um número absurdo de falsos alertas. Deve-se ter em mente que servidores lidam
+com centenas de conexões simultâneas e inúmeros pacotes a cada centésimo de segundo.
+\par O pré-processamento de dados é, então, exigido para atingir uma melhor performance na detecção de intrusão.
+O pré-processamento converte tráfego de rede em uma série de ocorrências, onde cada uma é representada por um vetor
+de características. As informações seguintes acerca dos dados e características foram baseadas nos estudos presentes
+em \cite{davis11}.
+
+\subsection{Fluxo}
+Os passos mais relevantes para o modelamento de dados de um NIDS são os seguintes:
+\begin{enumerate}
+    \item Criação da base -- identifica dados categorizados (normal ou anômalo) representativos para treino e teste.
+    Categorização de tráfego de rede pode ser uma tarefa difícil e longa, que geralmente envolve um especialista.
+    \item Construção de características -- cria características com maior discriminabilidade. Tais características
+    podem ser construídas por um humano ou por algoritmos de aprendizado de máquina.
+    \item Redução -- também chamado de "seleção de caterísticas", diminui a dimensionalidade da base de dados
+    descartando características irrelevantes ou redundantes. Usado para atenuar a "Maldição da Dimensionalidade"
+    \footnote{\textit{Curse of Dimensionality}: Ao se usar muitas características, supostamente se obtém baixa precisão.}

@@ -65,3 +65,34 @@ Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante 
     Uma composição de classificadores pode ser obtida usando-se técnicas fracas de aprendizado
     (geralmente mais rápidas). Cada classificador é treinado usando um subconjunto distinto dos dados.
     A base de testes é, então, processada por todos eles e, finalmente, categorizados pela maioria.
+
+
+\chapter{Sistemas A-NIDS funcionais}
+    O estudo feito em \cite{teodoro09} apresenta sistemas A-NIDS dividos em duas categorias: comerciais e de pesquisa.
+    Sistemas comerciais geralmente trabalham com um núcleo baseado em assinatura, enquanto sistemas de pesquisa
+    protótipos e metodologias inovadoras.
+
+ \section{Arquitetura}
+    Enquanto alguns detalhes de implementação podem variar, a base da esquematização de um A-NIDS é como apresentado em
+    \cite{catania12}:
+    \begin{itemize}
+        \item Aquisição de dados de tráfego -- coleta informação sobre os quadros da rede para processamento futuro.
+        \item Gerador de características do tráfego -- extrai características do tráfego capturado. Tais características
+         podem ser classificadas como "baixo nível" (obtidas diretamente do dado bruto), "alto nível" (deduzidas de um
+         processamento subsequente), "pacote" (coletadas de cabeçalhos de pacotes), "fluxo" (contendo informação das
+         conexões) e "payload" (obtidos da carga do pacote).
+        \item Detector de incidente -- identifica atividades intrusivas. Pode ser tanto baseado em assinatura quanto em
+        anomalia.
+        \item Gerador de modelo de tráfego -- contei informação base usada para guiar o detector de incidente.
+        \item Gerenciamento de resposta -- inicia manobras para superar uma intrusão em potencial. É inicializado pelo
+        detector de incidente.
+    \end{itemize}
+
+ \section{Comercialmente}
+ Um dos primeiros projetos de detecção de anomalia a ser amplamente conhecido foi o SPADE, um plugin para o Snort que
+ anhalisava transferência de pacotes procurando comportamentos fora do comum. Alternativamente, Stealthwatch utilizava
+ detecção de anomalia baseada em fluxo.
+ \par Sistemas recentes usam um arquitetura distribuída utilizando sensores e um
+ console central para gerenciar o processo de detecção. Esse é o caso do DeepSight, que usa um método estatístico.
+ A maioria dos sistemas comerciais utilizam um módulo de detecção baseado em assnatura aliado com um núcleo baseado em
+ anomalia. Todos esses sistemas se enquadram na categoria de classificadores híbridos.
