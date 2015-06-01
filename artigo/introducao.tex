@@ -1,0 +1,65 @@
+\chapter{Introdução}
+\label{introducao}
+
+Sistemas para análise de imagens digitais muitas vezes requerem, como entrada,
+quadros de resolução superior ao que é possível ser capturado pelo sensor, como
+por exemplo para reconhecer pessoas a distância \cite{parkparkkang2003}.
+Geralmente, quando o resultado da captura de imagens não tem a quantidade de
+informação necessária, a etapa seguinte de processamento não gera resultados
+satisfatórios. A solução mais direta para este problema é trocar os sensores
+utilizados na captura por modelos mais avançados capazes de capturar, com maior
+definição, detalhes requeridos, como por exemplo através de câmeras PTZ
+(\textit{pan}, \textit{tilt} e \textit{zoom}). Porém isto pode implicar em um
+aumento significativo do custo do sistema ou pode ser impossível caso a
+tecnologia não esteja disponível no mercado.
+
+Outra possibilidade é a aplicação da técnica de super-resolução, a qual
+consiste em gerar uma imagem com a resolução desejada a partir de um conjunto
+de quadros adquiridos pelo sensor \cite{howtobreak}. Uma sequência de quadros
+de um vídeo de uma única câmera ou um conjunto de imagens capturadas por
+diferentes câmeras simultaneamente representam diferentes vistas de uma mesma
+cena. As diferenças nas amostragens dos pixels de uma imagem para a outra
+resultam na captura de diferentes regiões e tornam a aplicação de tais técnicas
+possíveis.
+
+Na ocorrência de deslocamento entre diferentes quadros, mesmo que de baixa
+intensidade, \textit{i.e.} inferior a um pixel, a quantidade de informação é
+aumentada devido aos diferentes detalhes obtidos \cite{parkparkkang2003}. Após
+este deslocamento ser computado, os pixels são alinhados e projetados em uma
+nova matriz de maior densidade representando a imagem, na qual cada posição é
+equivalente a um pixel \cite{gonzalez}, de modo a reconstruí-la. Idealmente,
+haveria infinitos quadros e cada um registraria um deslocamento diferente. Na
+prática, as diferenças de quadros muito distantes temporalmente tornam a
+confiabilidade da estimação do movimento muito baixa, limitando o número de
+imagem as quais podem ser utilizadas. Este processo está ilustrado na figura
+\ref{img_rafael}, com um exemplo aplicado a um vídeo de uma pessoa passeando em
+um gramado, e na figura \ref{img_alignment}, de uma forma teórica.
+
+Em aplicações práticas, a qualidade da reconstrução depende de quão bem os
+quadros de entrada foram alinhados \cite{howtobreak}. A figura \ref{img_wesley}
+ilustra os resultados da super-resolução na reconstrução de uma mesma cena, com
+duas abordagens para alinhamento: preciso (Figura
+\ref{img_wesley_bom}) e impreciso (Figura \ref{img_wesley_ruim}).
+Como solução, métodos de fluxo ótico \cite{lukaskanade, hornschunck} têm sido
+empregados nesta fase de alinhamento \cite{bakerkanade99}.
+
+
+A super-resolução não está limitada apenas a duas dimensões, podendo também ser
+aplicada em imagens de profundidade \cite{rosenbush} (Figura \ref{img_align3d}.
+Modelos 3D têm sido gerado a partir de câmeras Tempo de Voo (ToF, \textit{Time
+of Flight}) de baixo custo \cite{schuon2009, gevrekci, cui2010} e de sensores
+baseados em luz estruturada \cite{cui2011} através da super-resolução.
+
+Este trabalho apresenta uma visão geral sobre as etapas (aquisição, alinhamento
+e reconstrução) do processo de super-resolução tanto em imagens coloridas (RGB)
+quanto em imagens de profundidade, com foco em sistemas biométricos. Neste
+trabalho trata-se a primeira etapa como resolvida, sendo consideradas
+sequências de vídeo de um único sensor.  Há uma ênfase maior em sistemas de
+reconhecimento facial, pois em geral requerem pequenas distâncias e a
+cooperação do indivíduo. Porém, espera-se que a aplicação da super-resolução
+possa permitir o reconhecimento a maiores distâncias e com menor cooperação.
+
+Foram implementados algoritmos de super-resolução para imagens de profundidade
+e coloridas. E os resultados preliminares obtidos são apresentados no capítulo
+\ref{resultados}. São também discutidas as dificuldades encontradas no
+desenvolvimento de métodos para tratar estas imagens e suas possíveis soluções.

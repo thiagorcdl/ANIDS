@@ -1,0 +1,95 @@
+\documentclass[12pt,a4paper]{ufpr}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{diagbox}
+
+% n - numero de niveis de subsubsection numeradas
+\setcounter{secnumdepth}{3}
+% coloca ate o nivel n no sumario
+\setcounter{tocdepth}{3}
+\graphicspath{{img/}}
+
+\title{Sistemas de Detecção de Intrusão em Rede baseados em Anomalias}
+\author{Thiago Roscia Cerdeiro de Lima}
+% ou Orientador
+\advisortitle{Orientador}
+\advisorname{Prof. Dr. Luis Allan Kunzle}
+% departamento, instituicao
+\advisorplace{Departamento de Informática, UFPR}
+\city{Curitiba}
+\year{2015}
+
+% nao insira o nome do orientador, ja eh feito automaticamente
+\banca{}{}{}{}{}{}{}{}
+
+\defesa{04 de outubro de 2000}
+
+\notaindicativa{Monografia apresentada para obtenção do Grau de
+Bacharel em Ciência da Computação pela Universidade Federal do
+Paraná.}
+
+\begin{document}
+
+\makecapa
+\makerosto         % cria folha de rosto para versao final da UFPR %
+%\maketermo      % cria folha com o termo de aprovacao da dissertacao%
+
+%\singlespacing           % espacamento 1 - capa UFPR%
+%\onehalfspacing          % espacamento 1/2 %
+\doublespacing            % espacamento 2 - UFPR %
+
+\pagestyle{headings}
+\pagenumbering{roman}
+
+%\chapter*{Agradecimentos}
+%\input{agradecimentos.tex}          % possiu somente o texto
+
+\tableofcontents
+
+%\listoffigures         % se houver mais do que 3 figuras
+%\addcontentsline{toc}{chapter}{\MakeUppercase{Lista de Figuras}}
+%\newpage
+
+%\listoftables        % se houver mais do que 3 tabelas
+%\addcontentsline{toc}{chapter}{\MakeUppercase{Lista de Tabelas}}
+%\newpage
+
+\chapter*{Resumo}
+\addcontentsline{toc}{chapter}{\MakeUppercase{Resumo}}
+\input{resumo.tex}           % somente o texto
+\newpage
+
+
+\pagenumbering{arabic}
+
+\input{introducao.tex}
+\input{conclusao.tex}
+
+% Trocar para ficar no padrão brasileiro
+%\bibliographystyle{brazil}
+\bibliographystyle{plain}
+\bibliography{bib}
+% utilize macros (3 primeiras letras do mes em ingles, minusculas) no seu
+% .bib para atribuir o nome do mes em portugues nas referencia,
+% se o style for brazil, outros estilos tambem aceitam estas macros
+% Ex:
+%
+% @InProceedings{teste,
+%   author =       {Luciano}
+%   year =         {2000}
+%   month =        {}#sep;
+% }
+%
+\addcontentsline{toc}{chapter}{\MakeUppercase{Bibliografia}}
+
+\singlespacing
+
+\end{document}
