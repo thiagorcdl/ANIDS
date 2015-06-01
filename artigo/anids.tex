@@ -1,4 +1,4 @@
-\chapter{Anomaly-based IDS}
+\chapter{Anomaly-based IDS (A-NIDS)}
 \label{anids}
  A técnica de detecção de anomalia analisa o atual comportamento da rede para checar se corresponde ou não a um
  comportamento normal. O maior benefício desse método é a habilidade de identificar novos ataques com sucesso.
@@ -27,3 +27,41 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
  grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
 
  \section{Técnicas de Machine Learning}
+ Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o comportamento esperado do
+ modelo. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
+ novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
+ do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
+ \begin{itemize}
+    \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características
+    \item Modelos de Markov -- comapra a probabilidade dos dados observados com um threshold definido
+    \item Redeus neurais -- cria um rede de perceptrons com habilidade de se adaptar
+    \item Lógica Fuzzy -- enxerga características como variáveis fuzzy e classifica com base em valores contínuos
+    \item Algoritmos Genéticos -- deriva regras de classificação e seleciona as características mais discriminantes
+    \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação
+    \item Árvores de Decisão -- cria uma árvore onde cada folha representa uma classe e arestas correspondem a
+        diferentes valores de atributos
+    \item Clustering -- algoritmo não-supervisionado que agrupa dados com base em suas similaridades.
+\end{itemize}
+
+\section{Combinação de Classificadores}
+Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante estudada no meio acadêmico é a
+ combinação de classificadores. Tais combinações podem se dar de diversas maneiras, como por exemplo: Classificadores
+ Híbridos, Composição de Classificadores \footnote{Tradução livre do termo em inglês Ensemble Classifiers.} e Classificadores em Cascata.
+
+ \subsection{Classificadores Híbridos}
+    Um classificador híbrido consiste de dois componentes. O primeiro pré-processa o dado de entrada e envia ao segundo
+    classificador, que chega ao resultado final. O primeiro componente de classificadores híbridos pode ser usado tanto
+    como uma técnica de clustering para achar as classes que o segundo componente utilizará para categorizar os dados;
+    quanto como um otimizadoe de performance para o segundo modelo, que corresponde ao método integrado.
+
+
+ \subsection{Classificadores em Cascata}
+    Pode ser considerado uma extensão dos classificadores híbridos, podendo consistir de inúmeros classificadores, onde
+    o n-ésimo classificador utiliza como entrada os dados rejeitados pelo classificador anterior, ou seja, que não
+    atingiram um grau de certeza satisfatório. Esse método foi analsiado mais a fundo e testado a fim de comparar
+    a agilidade e precisão em uma base de dados própria.
+
+ \subsection{Composição de Classificadores}
+    Uma composição de classificadores pode ser obtida usando-se técnicas fracas de aprendizado
+    (geralmente mais rápidas). Cada classificador é treinado usando um subconjunto distinto dos dados.
+    A base de testes é, então, processada por todos eles e, finalmente, categorizados pela maioria.

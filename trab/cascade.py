@@ -28,6 +28,7 @@ def search(n, item_list, instances, files, tholds):
 
 
 if __name__ == "__main__":
+    instances = 0
     argc = len(sys.argv)
     if argc < 2:
         print "Usage:\n\t%s <file1> <threshold1> ... <fileN> <thresholdN>" % sys.argv[0]
