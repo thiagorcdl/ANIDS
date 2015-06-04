@@ -16,6 +16,10 @@ A escolha de informações da rede é amplamente afetada pelos requisitos de det
 É possível ter sistemas de detecção específicos, utilizando um conjunto de características limitado.
 Para um sistema mais genérico, o ideal seria utilizar detectores separados utilizando conjuntos de características
 distintos, um para cada especificidade. Dependendo da origem desses dados, têm-se algumas vantagens e desvantagens.
+Técnicas para análise de conteúdo ainda não estão tão concretizadas quanto as que extraem características de
+cabeçalhos. Assim comoanalisar conteúdo do lado do cliente ainda é um campo não tão estudado quanto o lado do servidor
+numa perspectiva de A-NIDS. Técnicas do lado do cliente almejam detectar ameaças em aplicações web, como \textit{drive-by
+downloads}, \textit{cross-site scripting} e trechos maliciosos de JavaScript.
 
 \subsection{Cabeçalho de pacote}
 Características obtidas através de  cabeçalhos de pacotes têm a qualidade de serem rápidos, sem exigir muito
@@ -27,7 +31,7 @@ posteriores.
 Entretanto, pacotes individuais não podem ser usados para identificar padrões incomuns durante um grande período.
 Existem ataques que contém cabeçalhos normais quando analisados individualmente, enquanto sua repetição durante
 um certo tempo pode ser considerada anômala. Um exemplo seria o ataque de negação de serviço, popularmente conhecido
-como DoS.
+como \textit{DoS}.
 
 \subsection{Corpo de pacote}
 Quando ataques são destinados a aplicações, os bytes maliciosos estão dentro do corpo do
@@ -46,11 +50,7 @@ comparar assinatoras de malware conhecido, mas podem aplicar heurísticas, como 
 presença de código shell.
 
 \subsection{Cliente-Servidor}
-Analyzing client content
-is a less researched field, from an anomaly-NIDS per-
-spective. The client techniques intended to detect cur-
-rent web threats such as drive-by downloads, cross-
-site scripting and other malicious JavaScript
+
 
 
 \section{Pré-processamento}
