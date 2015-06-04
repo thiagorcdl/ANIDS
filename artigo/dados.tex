@@ -10,6 +10,9 @@ Os passos mais relevantes para o modelamento de dados de um NIDS são os seguint
     descartando características irrelevantes ou redundantes. Usado para atenuar a "Maldição da Dimensionalidade"
     \footnote{\textit{Curse of Dimensionality}: Ao se usar muitas características,
     supostamente se obtém baixa precisão.}.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Origem dos Dados}
 A escolha de informações da rede é amplamente afetada pelos requisitos de detecção ao se projetar o sistema.
@@ -49,9 +52,7 @@ conteúdo, como requisições HTTP ou apenas o JavaScript de um conteúdo baixad
 comparar assinatoras de malware conhecido, mas podem aplicar heurísticas, como Casamento de Padrões para detectar a
 presença de código shell.
 
-\subsection{Cliente-Servidor}
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Pré-processamento}
 Como anteriormente apontado, sistemas baseados em anomalia estão sujeitos a uma alta taxa de Falso Positivo. Apenas
@@ -63,28 +64,49 @@ de características. As informações seguintes acerca dos dados e característi
 em \cite{davis11}.
 
 \subsection{Derivação}
-Different types of features used in anomaly-based
-NIDS were covered by [3]. Each feature type is de-
-rived from many data preprocessing methods includ-
-ing organizing packets into flows, analyzing applica-
-tion content for fields of interest or parsing individual
-network packet headers.
+Dfierentes tipos de características que podem ser usados em NIDS baseados em anomalia foram cobertos em \cite{davis11}.
+Cada tipo de característica é derivada de vários métodos de pré-processamento, incluindo organizar pacotes em fluxos,
+analizar conteúdo de aplicações em busca de campos de interesse ou percorrer cabeçalhos de cada pacote. A derivação do
+potencial conjunto de características é um passo essencial para o NIDS baseado em anomalia. Analogamente,
+pré-processamentos subsequentes podem ajudar ainda mais a aumentar a eficiência do NIDS.
+\par Métodos de pré-processamento de mineiração de dados podem ser usados, incluindo tranformação, redução e
+discretização de dados, como os apresentados em \cite{ribeiro08}. Uma técnica de redução geralmente utilziada é a
+\textit{Principal Component Analysis}. PCA tem se msotrado útil para redução da dimensionaldiade dos dados,
+consequentemente redizindo o custo computacional do sistema de detecção
+\par Para eliminar caracterśiticas redundantes, diversos algoritmos automatizados para seleção de características
+também existem, resultando em redução de dados similar. Tais métodos de redução de dados fornecem um meio preciso para
+a conversão de um conjunto candidato para o conjunto final de características. É possível que métodos automáticos de
+redução possam melhorar ainda mais o NIDS, apesar de que alguns sistemas são construídos apenas se baseando no
+conhecimento de um especialista para construir conjuntos de características significativos.
 
 
 \section{Conjuntos de Características}
 \subsection{Conexões múltiplas}
-Great part of the NIDS reviewed in [3] use flow or
-session network data. Features are then built from
-the flows. The most popular is the packet header
-method using multiple connection derived (MCD) fea-
-tures. These features are generally derived using
-mean, standard deviation, and percentage of flows,
-covering multiple sessions. Anomaly-based NIDS us-
-ing these features are
+Grande parte dos NIDS analisados em \cite{davis11} usam dados de rede referentes a fluxo ou sessão. Características
+são construídas a partir do fluxo. O método mais popular é o de cabeçalho de pacotes utilizando características
+derivadas de múltiplas conexões (MCD). Essas características são geralmente divididas usando média, desvio padrão, e
+procentagem de fluxos, cobrindo múltiplas sessões. NIDS baseados em anomalia que utilizam essas caracterśiticas são
+capazes de discernir entre atividade normal da rede e tráfego incomum como \textit{DoS} e \textit{scanning}.
+\par CARACS MCD são geralmente extraídas a partir de conexões dentro de um intervalo de tempo. A maioria das
+ características de MCD são baseadas em volume, como o a quantidade de conexões a um endereço de IP e porta
+ em um espaço de tempo. Portanto, CARACS derivadas de múltiplas conexões podem ser facilmente usados para detectar
+ volumes excessivos de tráfego relacionados a \textit{DoS} e \textit{probing}. Como pacotes anômalos individuais não
+ suprem o valor baseado em volume, eles podem ser ignorados.
+
 \subsection{Única conexão}
-Single connection derived (SCD) features are used to
-detect anomalous behavior within a single session.
-These can highlight an unexpected protocol, uncom-
-mon data sizes, unusual packet timing, or uncommon
-TCP flag sequences. Thereby, SCD features enable
-the detection
+Características derivadas de conexões individuais (SCD) são utilziadas para detectar comportamento anômalo dentro de
+uma úncia sessão. Elas podem apontar um protocolo inesperado, tamanhos incomuns de dados, timestamp não condizente,
+ou sequências incomuns de \textit{flags} de TCP. Portanto, características SCD permitem detecção de uso anômalo da rede
+por \textit{backdoors}, túnel HTTP e afins.
+\par As CARACS SCD fornecem contexto que pode ser usado para encotnrar anomalias não contextuais. Por exemplo, se a
+temporização de pacotes dentro de uma porta monitorada não se encaixa com um perfil esperado, um alerta pode ser
+disparado, uma vez que pode se tratar de um protocolo de tunelamento.
+
+\subsection{KDD Cup 99}
+O KDD Cup 99 se trata de uma base dados para uso livre. Ela contém tanto características SCD quando MCD, incluindo 13
+CARACS baseadas em conteúdo que podem ser usadas para detectar ataques \textit{R2L} e \textit{U2R}. Tais CARACS
+foram construídas por um especialista e involvem informações de mais alto nível, como o número de tentativas de login
+sem sucesso, se acesso root ao terminal foi conseguido, e o número de operações de criação de arquivo.
+\par Consdierando que o KDD Cup 99 já tem mais de 15 anos, é provável que sessas CARACS não sejam mais úteis
+para detectar os tipos de ataques recentes na realidade do fluxo de dados na rede atualmente. Para se detectar
+ameaças atuais, é necessário construir características baseadas em conteúdo novas, uma vez que o conteúdo em si mudou.
