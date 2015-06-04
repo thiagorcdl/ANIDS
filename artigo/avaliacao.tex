@@ -1,0 +1,21 @@
+\chapter{Análise de Trabalhos Relacionados}
+\label{analise}
+
+No meio acadêmico, dois artigos recentes trouxeram implementações promissoras a respeito de sistemas de detecção de
+anomalia. Um deles (\cite{lin12}) apresenta um algoritmo inteligente e o outro (\cite{papadonikolakis12}) mostra o
+ganho de performance ao se programar o sistema diretamente em uma placa FPGA.
+
+\section{Processando grandes quantidades de dados}
+A simulação apresentada em \cite{lin12} usou o a base do KDD Cup 99. Ela possui 32 características quantitativas e
+9 qualitativas, junto a tráfego normal e ataques de \textit{probing}, negação de serviço, \textit{user to root} e
+\textit{remote to local}. O algoritmo funciona pré-processando os dados de treino e teste e gerando uma solução
+inicial aleatória. A solução é atualizada a cada iteração do algoritmo. Enquanto um limite não é satisfeito,
+são utilizados Support Vector Machine (SVM) e Simulated Annealing (SA) para selecionar o melhor conjunto de
+características. Por conseguinte, Árvore de Decisão e SA são usados para aumentar a precisão do teste e construir
+regras de decisão. No final, a melhor precisão e as melhores características e regras de decisão são anunciadas.
+
+\subsection{Support Vector Machine}
+SVM trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
+Ele se baseia em minimizar o risco estrutural
+
+\subsection{Árvore de Decisão}
