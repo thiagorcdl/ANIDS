@@ -6,16 +6,48 @@ anomalia. Um deles (\cite{lin12}) apresenta um algoritmo inteligente e o outro (
 ganho de performance ao se programar o sistema diretamente em uma placa FPGA.
 
 \section{Processando grandes quantidades de dados}
-A simulação apresentada em \cite{lin12} usou o a base do KDD Cup 99. Ela possui 32 características quantitativas e
-9 qualitativas, junto a tráfego normal e ataques de \textit{probing}, negação de serviço, \textit{user to root} e
-\textit{remote to local}. O algoritmo funciona pré-processando os dados de treino e teste e gerando uma solução
+A simulação apresentada em \cite{lin12} usou o a base do KDD Cup 99. O algoritmo funciona pré-processando os dados de treino e teste e gerando uma solução
 inicial aleatória. A solução é atualizada a cada iteração do algoritmo. Enquanto um limite não é satisfeito,
 são utilizados Support Vector Machine (SVM) e Simulated Annealing (SA) para selecionar o melhor conjunto de
 características. Por conseguinte, Árvore de Decisão e SA são usados para aumentar a precisão do teste e construir
 regras de decisão. No final, a melhor precisão e as melhores características e regras de decisão são anunciadas.
+\par Nos testes descritos no  artigo, após a seleção de atributos, foram utilizados 23 durante o processo de
+classificação. O algoritmo conseguiu atingir uma precisão de 99,6\%, o que representa um grande ganho quando comparado
+ a outros resultados até o momento.
 
 \subsection{Support Vector Machine}
 SVM trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
-Ele se baseia em minimizar o risco estrutural
+Ele se baseia em minimizar o risco estrutural. Os dados de enrada são mapeados por uma \textit{função núcleo}, a qual
+é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última é
+é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade. SA é aplicado para escolher
+os melhores valores para os parâmetros usados na função \textit{radial basis}.
 
 \subsection{Árvore de Decisão}
+DT é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista. Ele
+cria uma árvore de decisão contando um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
+nós internos, que correspondem às características; arestas, que são os possíveis valores de cada característica; e
+folhas, que contêm a classe a ser atribuídao ao caso de teste.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aumentado a velocidade de processamento}
+Enquanto o algoritmo anterior pretende otimizar apenas a precisão, o estudo apresentado em \cite{papadonikolakis12}
+foca em na aceleração do processo de classificação. Aqui também foi utilizado SVM para implementar o A-NIDS, mas dessa
+vez diretamente em um FPGA, fazendo uso de seu potencial de processamento paralelo.
+\par Foram propostas três arquiteturas diferentes.
+\begin{enumerate}
+    \item \textit{Heterogeneous Baseline Classifier} -- O objetivo é explorar os requerimentos de precisão dos atributos. Ele
+    tenta maximizar paralelização enquanto mantém a relação entre blocos de processamneto digital e blocos lógicos.
+    \item \textit{Fit Cascade Chain} -- Aproveita o potencial de aritmética customizada oferecido pelo FPGA para criar uma
+    cascata com duas precisões aritméticas diferentes. Primeiro um classificador de baixo custo e alta vazão com baixa
+    precisão é usado. Somente os dados que não puderem ser classificados são alimentados ao segundo classificador. Este
+    possui alta precisão e, logo, maior custo, mas com menos requisições de vazão.
+    \item \textit{Reconfigurable Cascade Chain} -- Foi projetado para problemas com grandes quantidades de dados, que podem
+    exceder as limitações de hardware. Essa arquitetura propõe uma reconfiguração do FPGA depois do estágio de treino e
+    expande o espaço de design possível. Isso permite a utilização de mais blocos durante as classificação.
+\end{enumerate}
+\par A base utilizada para testes foi a \textit{MINIST Dataset}. Comparando com testes prévios em GPU, o design
+\textit{Heterogeneous Baseline Classifier} processou os dados 7 vezes mais rápido. Os melhores resultados foram
+obtidos usando \textit{Reconfigurable Cascade Chain}, com um ganho de 20 vezes, isto é, levando apenas 5% do tempo
+que a GPU consumiu.

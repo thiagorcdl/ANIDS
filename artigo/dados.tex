@@ -77,11 +77,12 @@ temporização de pacotes dentro de uma porta monitorada não se encaixa com um 
 disparado, uma vez que pode se tratar de um protocolo de tunelamento.
 
 \subsection{KDD Cup 99}
-O KDD Cup 99 se trata de uma base dados para uso livre. Ela contém tanto características SCD quando MCD, incluindo 13
-características baseadas em conteúdo que podem ser usadas para detectar ataques \textit{R2L} e \textit{U2R}. Tais características
-foram construídas por um especialista e involvem informações de mais alto nível, como o número de tentativas de login
-sem sucesso, se acesso root ao terminal foi conseguido, e o número de operações de criação de arquivo.
-\par Consdierando que o KDD Cup 99 já tem mais de 15 anos, é provável que sessas características não sejam mais úteis
+O KDD Cup 99 se trata de uma base dados para uso livre. Ela possui 32 características quantitativas e
+9 qualitativas, junto a tráfego normal e ataques de \textit{probing}, negação de serviço, \textit{user to root} e
+\textit{remote to local}.  Tais características foram construídas por um especialista e involvem informações de mais
+alto nível, como o número de tentativas de login sem sucesso, se acesso root ao terminal foi conseguido,
+e o número de operações de criação de arquivo.
+\par Consdierando que o KDD Cup 99 já tem mais de 15 anos, é provável que essas características não sejam mais úteis
 para detectar os tipos de ataques recentes na realidade do fluxo de dados na rede atualmente. Para se detectar
 ameaças atuais, é necessário construir características baseadas em conteúdo novas, uma vez que o conteúdo em si mudou.
 
