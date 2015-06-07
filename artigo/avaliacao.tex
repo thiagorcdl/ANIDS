@@ -1,7 +1,25 @@
 \chapter{Análise de Trabalhos Relacionados}
 \label{analise}
 
-No meio acadêmico, dois artigos recentes trouxeram implementações promissoras a respeito de sistemas de detecção de
+NIDS baseado em anomalia têm se mostrado um a área de estudo promissora, mas ainda necessita de bastante pesquisa.
+Analisando os dados de artigos publicados entre os anos 2000 e 2007 e as diferentes técnicas utilizadas \cite{tsai09},
+é possível extrair algumas inferências.
+\begin{itemize}
+    \item  A maioria dos artigos se baseia no uso de classificadores unitários, apesar de que o uso de
+    classificadores híbridos tem aumentado durante os últimos anos. Classificadores compostos são usados por poucos.
+
+    \item Os algoritmos mais estudados para detecção de instrusão foram SVM e KNN. Quanto a classificadores híbridos,
+    o método \textit{integrado} é o mais popular.
+
+    \item A utilização de seleção de atributos têm crescido com o tempo. Enquanto em 2003 apenas um quarto dos estudos analisados
+por \cite{tsai09} utilizava essa técnica, em 2007 foi o caso de 9 dentre 11. Ou seja, apenas dois
+(\cite{peddabachigari07}, \cite{li07}) não utilizaram.
+
+    \item Como há poucas bases de dados públicas para detecção de instrusão, a maioria dos estudos se baseia nas
+    bases KDD Cup 99 e DARPA 1998.
+\end{itemize}
+
+\par Dois artigos recentes trouxeram implementações promissoras a respeito de sistemas de detecção de
 anomalia. Um deles (\cite{lin12}) apresenta um algoritmo inteligente e o outro (\cite{papadonikolakis12}) mostra o
 ganho de performance ao se programar o sistema diretamente em uma placa FPGA.
 
@@ -27,7 +45,6 @@ DT é um método de classificação baseado em um algoritmo guloso, utilizando u
 cria uma árvore de decisão contando um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
 nós internos, que correspondem às características; arestas, que são os possíveis valores de cada característica; e
 folhas, que contêm a classe a ser atribuídao ao caso de teste.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
