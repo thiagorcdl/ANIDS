@@ -46,20 +46,22 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
 \section{Combinação de Classificadores}
 Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante estudada no meio acadêmico é a
  combinação de classificadores. Tais combinações podem se dar de diversas maneiras, como por exemplo: Classificadores
- Híbridos, Composição de Classificadores \footnote{Tradução livre do termo em inglês Ensemble Classifiers.} e Classificadores em Cascata.
+ Híbridos, Composição de Classificadores \footnote{Tradução livre do termo em inglês Ensemble Classifiers.} e
+ Classificadores em Cascata.
 
  \subsection{Classificadores Híbridos}
     Um classificador híbrido consiste de dois componentes. O primeiro pré-processa o dado de entrada e envia ao segundo
     classificador, que chega ao resultado final. O primeiro componente de classificadores híbridos pode ser usado tanto
     como uma técnica de clustering para achar as classes que o segundo componente utilizará para categorizar os dados;
-    quanto como um otimizador de performance para o segundo modelo, que corresponde ao método \textit{integrado}.
+    quanto como um otimizador de performance para o segundo modelo, que corresponde ao método \textit{integrado}
+    \cite{aydin09}.
 
 
  \subsection{Classificadores em Cascata}
     Pode ser considerado uma extensão dos classificadores híbridos, podendo consistir de inúmeros classificadores, onde
     o n-ésimo classificador utiliza como entrada os dados rejeitados pelo classificador anterior, ou seja, que não
-    atingiram um grau de certeza satisfatório. Esse método foi analsiado mais a fundo e testado a fim de comparar
-    a agilidade e precisão em uma base de dados própria.
+    atingiram um grau de certeza satisfatório. Alguns estudos sugerem otimização de thresholds para aumentar precisão
+    \cite{oliveira05}.
 
  \subsection{Composição de Classificadores}
     Uma composição de classificadores pode ser obtida usando-se técnicas fracas de aprendizado
