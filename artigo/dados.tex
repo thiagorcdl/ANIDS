@@ -16,7 +16,7 @@ Os passos mais relevantes para o modelamento de dados de um NIDS são os seguint
 
 \section{Origem dos Dados}
 A escolha de informações da rede é amplamente afetada pelos requisitos de detecção ao se projetar o sistema.
-É possível ter sistemas de detecção específicos, utilizando um conjunto de características limitado.
+É possível ter sistemas de detecção específicos, utilizando um conjunto de características limitado \cite{guanzhong09}.
 Para um sistema mais genérico, o ideal seria utilizar detectores separados utilizando conjuntos de características
 distintos, um para cada especificidade. Dependendo da origem desses dados, têm-se algumas vantagens e desvantagens.
 Técnicas para análise de conteúdo ainda não estão tão concretizadas quanto as que extraem características de
@@ -119,7 +119,7 @@ duas ferramentas aparentemente promissoras: N-grams e libAnomaly. N-grams pode s
 automática de características, enquanto o libAnomaly se trata de uma biblioteca livre para modelos de pré-processamento
 de dados.
 \par No N-grams, perfis são construídos para diferentes tipso de arquivos, calculando as distribuições de frequência
-de byte. O NIDS compara, então, o tráfego observado com os perfis usando Distância Manhattan. N-gram é geralmente
+de byte \cite{zhuowei03}. O NIDS compara, então, o tráfego observado com os perfis usando Distância Manhattan. N-gram é geralmente
 usado para analsiar requisições ao servidor. É útil em detectar padrões anômalos, como código shell dentro de
 protocolos estruturados de aplicações, sem exigir supervisão muita supervisão.
 \par O foco do libAnomaly, por sua vez, é construir um punhado de modelos representando a transferência normal de

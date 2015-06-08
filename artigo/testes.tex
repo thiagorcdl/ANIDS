@@ -28,7 +28,7 @@ como mostra a tabela \ref{table:tfpn}.
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Positivo} & \begin{tabular}[c]{@{}l@{}}TP -- Conexão inofensiva é \\ classificada corretamente\end{tabular}  & \begin{tabular}[c]{@{}l@{}}FP -- Conexão anômala é \\ considerada normal\end{tabular} \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Negativo} & \begin{tabular}[c]{@{}l@{}}TN -- Conexão prejudicial é \\ classificada corretamente\end{tabular} & \begin{tabular}[c]{@{}l@{}}FN -- Conexão normal é \\ considerada anômala\end{tabular} \\ \hline
     \end{tabular}
-    \caption{My table}
+    \caption{Categorias para análise de corretude}
     \label{table:tfpn}
 \end{table}
 
@@ -37,8 +37,6 @@ Quando se sabe a verdadeira natureza dos casos de teste, é possível determinar
  um A-NIDS é a minimização a taxa de Falso Positivo. Teoricamente se 100\% das conexões forem consideradas anômalas
  e bloqueadas, teremos $FP_{rate}$ igual a 0. Por um lado, o sistema estaria bloqueando conexões inofensivas, por outro,
  estaria com certeza evitando conexões ameaçadores. O cálculo das taxas se dá da seguinte maneira.
-
-\newpage
 
  $$ Precisão = \frac{TP + TN}{P + N} $$
  $$ TP_{rate} = \frac{TP}{P} $$
@@ -64,7 +62,35 @@ bloqueada pelo sistema. Assim sendo, quanto maior o $TP_{rate}$ e menor o $FP_{r
 
 
 \section{Impacto de modelos representativos}
+O primeiro teste realizado levou em consideração apenas o SVM padrão fornecido pelo libSVM para o Weka. A finalidade
+era verificar o impacto da representabilidade da base de treino \cite{yaman11}, analisando a performance do algoritmo
+quando treinado com bases de diferentes tamanhos. Para esse estudo, o KDD Cup 99 foi divido em 5 particionamentos,
+cada um com tamanhos distintos de bases de treino e de testes, usando a opção de \textit{cross-validation} do Weka.
+O comando executado incluiu um pré-processamento de heurística de encolhimento, peso $1$, \emph{seed} de $3$, erro de
+$0.001$ e função núcleo \textit{Radial Basis}.
+
+\begin{table}[h]
+    \begin{tabular}{l|l|l|l|l|}
+        \cline{2-5}
+                                                        & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Treino} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Teste} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tempo} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Precisão} \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}1} & 10\%                                                        & 90\%                                                       & 16h13m                                             & 92.22\%                                               \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}2} & 20\%                                                        & 80\%                                                       & 24h02m                                             & 94.54\%                                               \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}3} & 30\%                                                        & 70\%                                                       & 27h32m                                             & 95.65\%                                               \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}4} & 40\%                                                        & 60\%                                                       & 32h11m                                             & 98.62\%                                               \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}5} & 50\%                                                        & 50\%                                                       & 38h45m                                             & 99.64\%                                               \\ \hline
+    \end{tabular}
+    \caption{Comparação entre particionamentos de tamanhos diferentes}
+    \label{table:partic}
+\end{table}
+
+\par A \ref{table:partic} mostra os as proporções de base de testes e treino em cada particionamento e seus respectivos
+resultados. É possível notar uma clara correlação entre o tamanho da base de treino e a porcentagem de acertos. O
+melhor resultado foi de $99.64$\% quando metade da base foi usada para gerar o modelo. Entretanto, em uma situação real
+não dados disponíveis o suficiente para se representar metade das transmissões que ocorrem diariamente.
+
 
 \section{Impacto da imprevisibilidade}
+Uma abordagem recente direcionou os estudos desse trabalho para a análise da real capacidade de algoritmos de
+aprendizado de máquinas em se adaptar a novas realidades e  detectar ameaças totalmente desconhecidas \cite{sommer10}.
 
 \section{Impacto da seleção de atributos}
