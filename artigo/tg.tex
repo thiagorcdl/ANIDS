@@ -10,6 +10,7 @@
 \usepackage{caption}
 \usepackage{setspace}
 \usepackage{diagbox}
+\usepackage[table,xcdraw]{xcolor}
 
 % n - numero de niveis de subsubsection numeradas
 \setcounter{secnumdepth}{3}
@@ -77,11 +78,13 @@ Paraná.}
 \input{avaliacao.tex}
 \input{testes.tex}
 \input{conclusao.tex}
-
 % Trocar para ficar no padrão brasileiro
 \bibliographystyle{brazil}
 %\bibliographystyle{plain}
+
+\inputencoding{latin2}
 \bibliography{bib}
+\inputencoding{utf8}
 % utilize macros (3 primeiras letras do mes em ingles, minusculas) no seu
 % .bib para atribuir o nome do mes em portugues nas referencia,
 % se o style for brazil, outros estilos tambem aceitam estas macros
