@@ -2,7 +2,7 @@
 Três baterias de testes foram conduzidas ao longo da produção deste trabalho de graduação a fim de ver na prática o
 impacto dos algoritmos de aprendizado de máquina quando aplicados em bases de dados com informações de rede.
 Em um dos testes, a base utilizada foi a supracitada KDD Cup 99. Para os outros, utilizou-se uma série de dados
- gerados pelo mestrando da PUC-PR Eduardo, orientado pelo Pr. Dr. Altair. Em ambos os casos, os algoritmos foram
+ gerados pelo mestrando da PUC-PR Eduardo Viegas, orientado pelo Pr. Dr. Altair Santin. Em ambos os casos, os algoritmos foram
  executados através do Weka.
 
 \section{Weka}
@@ -22,14 +22,14 @@ duas outras categorias podem ser usadas: verdadeiro ou falso. Quando cruzadas, o
 como mostra a tabela \ref{table:tfpn}.
 
 \begin{table}[h]
+    \caption{Categorias para análise de corretude}
+    \label{table:tfpn}
     \begin{tabular}{l|l|l|}
         \cline{2-3}
                                                                & \cellcolor[HTML]{EFEFEF}Verdadeiro (T)                                                           & \cellcolor[HTML]{EFEFEF}Falso (F)                                                     \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Positivo} & \begin{tabular}[c]{@{}l@{}}TP -- Conexão inofensiva é \\ classificada corretamente\end{tabular}  & \begin{tabular}[c]{@{}l@{}}FP -- Conexão anômala é \\ considerada normal\end{tabular} \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Negativo} & \begin{tabular}[c]{@{}l@{}}TN -- Conexão prejudicial é \\ classificada corretamente\end{tabular} & \begin{tabular}[c]{@{}l@{}}FN -- Conexão normal é \\ considerada anômala\end{tabular} \\ \hline
     \end{tabular}
-    \caption{Categorias para análise de corretude}
-    \label{table:tfpn}
 \end{table}
 
 Quando se sabe a verdadeira natureza dos casos de teste, é possível determinar a precisão, a taxa de Verdadeiro Positivo
@@ -70,6 +70,8 @@ O comando executado incluiu um pré-processamento de heurística de encolhimento
 $0.001$ e função núcleo \textit{Radial Basis}.
 
 \begin{table}[h]
+    \caption{Comparação entre particionamentos de tamanhos diferentes}
+    \label{table:partic}
     \begin{tabular}{l|l|l|l|l|}
         \cline{2-5}
                                                         & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Treino} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Teste} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tempo} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Precisão} \\ \hline
@@ -79,8 +81,6 @@ $0.001$ e função núcleo \textit{Radial Basis}.
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}4} & 40\%                                                        & 60\%                                                       & 32h11m                                             & 98.62\%                                               \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}5} & 50\%                                                        & 50\%                                                       & 38h45m                                             & 99.64\%                                               \\ \hline
     \end{tabular}
-    \caption{Comparação entre particionamentos de tamanhos diferentes}
-    \label{table:partic}
 \end{table}
 
 \par A \ref{table:partic} mostra os as proporções de base de testes e treino em cada particionamento e seus respectivos
@@ -91,6 +91,78 @@ não dados disponíveis o suficiente para se representar metade das transmissõe
 
 \section{Impacto da imprevisibilidade}
 Uma abordagem recente direcionou os estudos desse trabalho para a análise da real capacidade de algoritmos de
-aprendizado de máquinas em se adaptar a novas realidades e  detectar ameaças totalmente desconhecidas \cite{sommer10}.
+aprendizado de máquinas em se adaptar a novas realidades e detectar ameaças totalmente desconhecidas \cite{sommer10}.
+\par Através de simulações de rede, foi gerado um conjunto de dados, contendo conexões normais e anômalas,
+dispostos em três grupos distintos, os quais chamaremos de \textit{Base}, \textit{Análogo} e \textit{Desconhecido}.
+O primeiro é um limitado conjunto de conexões provenientes de conexões HTTP e SMTP. Este foi dividido em dois grupos:
+um para treino e outro para testes. O grupo \textit{Análogo}, como o nome sugere possui ataques semelhantes ou derivados
+ daqueles no grupo anterior. Já o terceiro, possui também ataques completamente desconhecidos provenientes de outros
+protocolos, como SNMP e SSH. Apenas o grupo \textit{Base} foi utilizado para treino. O objetivo é ver o comportamento do sistema quando novos
+ataques são recebidos, sejam eles derivados dos conhecidos ou completamente novos.
+\par Tanto o SVM quanto DT foram utilizados nesta análise. A \ref{table:dt} e a \ref{table:svm} mostram os resultados
+em cada etapa do processo.
+
+\begin{table}[h]
+    \centering
+    \caption{Resultados de DT em cada base}
+    \label{table:dtattrless}
+    \begin{tabular}{l|l|l|l|l|l|}
+        \cline{2-6}
+                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
+                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo & Acertos & Precisão \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.848       & 0.429       & 3.1s  & 84.82\% & 0.914    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.499       & 0.501       & 5.78s & 49.86\% & 0.414    \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{Resultados de SVM em cada base}
+    \label{table:svmattrless}
+    \begin{tabular}{l|l|l|l|l|l|}
+        \cline{2-6}
+                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
+                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 0.503       & 0.502       & 14h45min & 98.43\%  & 0.75     \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 90.78\%  & 0.937    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.78\%  & 0.75     \\ \hline
+    \end{tabular}
+\end{table}
+
+
 
 \section{Impacto da seleção de atributos}
+Tendo em vista o alto custo computacional para processar as 51 características iniciais, foi ponderada a viabilidade
+de se utilizar uma seleção de atributos prévia para agilizar o processamento na tomada de decisões. Utilizando o
+PCA, a quantidade de características foi reduzida para 39. Novos testes foram executados, seguindo o mesmo método da
+análise anterior. A \ref{table:dtattrless} e a \ref{table:svmattrless}  mostra o resultado dos algoritmos nesse cenário.
+
+\begin{table}[h]
+    \centering
+    \caption{Resultados de DT em cada base com seleção de atributos}
+    \label{table:dtattrless}
+    \begin{tabular}{l|l|l|l|l|l|}
+        \cline{2-6}
+                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
+                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo & Acertos & Precisão \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.848       & 0.429       & 3.1s  & 84.82\% & 0.914    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.499       & 0.501       & 5.78s & 49.86\% & 0.414    \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{Resultados de SVM em cada base com seleção de atributos}
+    \label{table:svmattrless}
+    \begin{tabular}{l|l|l|l|l|l|}
+        \cline{2-6}
+                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
+                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 0.503       & 0.502       & 14h45min & 50.3\%  & 0.75     \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 6.78\%  & 0.937    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.0\%  & 0.75     \\ \hline
+    \end{tabular}
+\end{table}
+
