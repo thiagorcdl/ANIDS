@@ -19,11 +19,11 @@ a performance de classificadores e analisar as taxas de acertos e alarmes falsos
 baseia-se em apenas duas classes: positivo ou negativo. Em termos de detecção de intrusão, uma conexão pode ser
 considerada inofensiva (positivo) ou prejudicial (negativa). Para avaliar a precisão de um classificador,
 duas outras categorias podem ser usadas: verdadeiro ou falso. Quando cruzadas, obtém-se quatro possíveis resultados,
-como mostra a tabela \ref{table:tfpn}.
+como mostra a tabela \ref{tab:tfpn}.
 
 \begin{table}[h]
     \caption{Categorias para análise de corretude}
-    \label{table:tfpn}
+    \label{tab:tfpn}
     \begin{tabular}{l|l|l|}
         \cline{2-3}
                                                                & \cellcolor[HTML]{EFEFEF}Verdadeiro (T)                                                           & \cellcolor[HTML]{EFEFEF}Falso (F)                                                     \\ \hline
@@ -71,7 +71,7 @@ $0.001$ e função núcleo \textit{Radial Basis}.
 
 \begin{table}[h]
     \caption{Comparação entre particionamentos de tamanhos diferentes}
-    \label{table:partic}
+    \label{tab:partic}
     \begin{tabular}{l|l|l|l|l|}
         \cline{2-5}
                                                         & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Treino} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tamanho Teste} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Tempo} & \multicolumn{1}{c|}{\cellcolor[HTML]{EFEFEF}Precisão} \\ \hline
@@ -83,7 +83,7 @@ $0.001$ e função núcleo \textit{Radial Basis}.
     \end{tabular}
 \end{table}
 
-\par A \ref{table:partic} mostra os as proporções de base de testes e treino em cada particionamento e seus respectivos
+\par A \ref{tab:partic} mostra os as proporções de base de testes e treino em cada particionamento e seus respectivos
 resultados. É possível notar uma clara correlação entre o tamanho da base de treino e a porcentagem de acertos. O
 melhor resultado foi de $99.64$\% quando metade da base foi usada para gerar o modelo. Entretanto, em uma situação real
 não dados disponíveis o suficiente para se representar metade das transmissões que ocorrem diariamente.
@@ -99,13 +99,13 @@ um para treino e outro para testes. O grupo \textit{Análogo}, como o nome suger
  daqueles no grupo anterior. Já o terceiro, possui também ataques completamente desconhecidos provenientes de outros
 protocolos, como SNMP e SSH. Apenas o grupo \textit{Base} foi utilizado para treino. O objetivo é ver o comportamento do sistema quando novos
 ataques são recebidos, sejam eles derivados dos conhecidos ou completamente novos.
-\par Tanto o SVM quanto DT foram utilizados nesta análise. A \ref{table:dt} e a \ref{table:svm} mostram os resultados
+\par Tanto o SVM quanto DT foram utilizados nesta análise. A \ref{tab:dt} e a \ref{tab:svm} mostram os resultados
 em cada etapa do processo.
 
 \begin{table}[h]
     \centering
     \caption{Resultados de DT em cada base}
-    \label{table:dtattrless}
+    \label{tab:dt}
     \begin{tabular}{l|l|l|l|l|l|}
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
@@ -119,7 +119,7 @@ em cada etapa do processo.
 \begin{table}[h]
     \centering
     \caption{Resultados de SVM em cada base}
-    \label{table:svmattrless}
+    \label{tab:svm}
     \begin{tabular}{l|l|l|l|l|l|}
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
@@ -136,12 +136,12 @@ em cada etapa do processo.
 Tendo em vista o alto custo computacional para processar as 51 características iniciais, foi ponderada a viabilidade
 de se utilizar uma seleção de atributos prévia para agilizar o processamento na tomada de decisões. Utilizando o
 PCA, a quantidade de características foi reduzida para 39. Novos testes foram executados, seguindo o mesmo método da
-análise anterior. A \ref{table:dtattrless} e a \ref{table:svmattrless}  mostra o resultado dos algoritmos nesse cenário.
+análise anterior. A \ref{tab:dtattrless} e a \ref{tab:svmattrless}  mostra o resultado dos algoritmos nesse cenário.
 
 \begin{table}[h]
     \centering
     \caption{Resultados de DT em cada base com seleção de atributos}
-    \label{table:dtattrless}
+    \label{tab:dtattrless}
     \begin{tabular}{l|l|l|l|l|l|}
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
@@ -155,7 +155,7 @@ análise anterior. A \ref{table:dtattrless} e a \ref{table:svmattrless}  mostra 
 \begin{table}[h]
     \centering
     \caption{Resultados de SVM em cada base com seleção de atributos}
-    \label{table:svmattrless}
+    \label{tab:svmattrless}
     \begin{tabular}{l|l|l|l|l|l|}
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
