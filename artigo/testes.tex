@@ -93,14 +93,17 @@ não dados disponíveis o suficiente para se representar metade das transmissõe
 Uma abordagem recente direcionou os estudos desse trabalho para a análise da real capacidade de algoritmos de
 aprendizado de máquinas em se adaptar a novas realidades e detectar ameaças totalmente desconhecidas \cite{sommer10}.
 \par Através de simulações de rede, foi gerado um conjunto de dados, contendo conexões normais e anômalas,
-dispostos em três grupos distintos, os quais chamaremos de \textit{Base}, \textit{Análogo} e \textit{Desconhecido}.
+dispostos em três grupos distintos, os quais chamaremos de \textit{Inicial}, \textit{Análogo} e \textit{Desconhecido}.
 O primeiro é um limitado conjunto de conexões provenientes de conexões HTTP e SMTP. Este foi dividido em dois grupos:
 um para treino e outro para testes. O grupo \textit{Análogo}, como o nome sugere possui ataques semelhantes ou derivados
  daqueles no grupo anterior. Já o terceiro, possui também ataques completamente desconhecidos provenientes de outros
-protocolos, como SNMP e SSH. Apenas o grupo \textit{Base} foi utilizado para treino. O objetivo é ver o comportamento do sistema quando novos
+protocolos, como SNMP e SSH. Apenas o grupo \textit{Inicial} foi utilizado para treino. O objetivo é ver o comportamento do sistema quando novos
 ataques são recebidos, sejam eles derivados dos conhecidos ou completamente novos.
-\par Tanto o SVM quanto DT foram utilizados nesta análise. A \ref{tab:dt} e a \ref{tab:svm} mostram os resultados
-em cada etapa do processo.
+\par Tanto o SVM quanto DT foram utilizados nesta análise. As tabelas \ref{tab:dt} e \ref{tab:svm} mostram os resultados
+em cada etapa do processo, em termos de taxa de Verdadeiro Positivo, taxa de Falso Positivo, tempo para classificar
+todas as instâncias da respectiva base, precisão e porcentagem de instâncias classificadas corretamente. As taxas de
+acerto evidenciam uma grande perda de confiabilidade conforme o surgimento de novos ataques, sendo a classificação da
+base \textit{Desconhecido} praticamente tão eficiente quanto uma adivinhação aleatória.
 
 \begin{table}[h]
     \centering
@@ -110,7 +113,7 @@ em cada etapa do processo.
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
                                                                    & $TP_{rate}$ & $FP_{rate}$ & Tempo & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.848       & 0.429       & 3.1s  & 84.82\% & 0.914    \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.499       & 0.501       & 5.78s & 49.86\% & 0.414    \\ \hline
     \end{tabular}
@@ -124,7 +127,7 @@ em cada etapa do processo.
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
                                                                    & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 0.503       & 0.502       & 14h45min & 98.43\%  & 0.75     \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.503       & 0.502       & 14h45min & 98.43\%  & 0.75     \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 90.78\%  & 0.937    \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.78\%  & 0.75     \\ \hline
     \end{tabular}
@@ -136,7 +139,7 @@ em cada etapa do processo.
 Tendo em vista o alto custo computacional para processar as 51 características iniciais, foi ponderada a viabilidade
 de se utilizar uma seleção de atributos prévia para agilizar o processamento na tomada de decisões. Utilizando o
 PCA, a quantidade de características foi reduzida para 39. Novos testes foram executados, seguindo o mesmo método da
-análise anterior. A \ref{tab:dtattrless} e a \ref{tab:svmattrless}  mostra o resultado dos algoritmos nesse cenário.
+análise anterior.
 
 \begin{table}[h]
     \centering
@@ -146,7 +149,7 @@ análise anterior. A \ref{tab:dtattrless} e a \ref{tab:svmattrless}  mostra o re
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
                                                                    & $TP_{rate}$ & $FP_{rate}$ & Tempo & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.848       & 0.429       & 3.1s  & 84.82\% & 0.914    \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.499       & 0.501       & 5.78s & 49.86\% & 0.414    \\ \hline
     \end{tabular}
@@ -160,9 +163,12 @@ análise anterior. A \ref{tab:dtattrless} e a \ref{tab:svmattrless}  mostra o re
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
                                                                    & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Base}         & 0.503       & 0.502       & 14h45min & 50.3\%  & 0.75     \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.503       & 0.502       & 14h45min & 50.3\%  & 0.75     \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 6.78\%  & 0.937    \\ \hline
         \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.0\%  & 0.75     \\ \hline
     \end{tabular}
 \end{table}
 
+As tabelas \ref{tab:dtattrless} e \ref{tab:svmattrless} mostram que o resultado dos algoritmos nesse
+cenário teve nenhum ganho significativo. Enquanto os atributos selecionados podem ser mais descritivos para os
+atques vistos na base \textit{Inicial}, talvez não sejam interessantes para identificar os ataques correntes.
