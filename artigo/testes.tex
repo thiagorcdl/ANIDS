@@ -39,7 +39,7 @@ Quando se sabe a verdadeira natureza dos casos de teste, é possível determinar
  e bloqueadas, teremos $FP_{rate}$ igual a 0. Por um lado, o sistema estaria bloqueando conexões inofensivas, por outro,
  estaria com certeza evitando conexões ameaçadores. O cálculo das taxas se dá da seguinte maneira.
 
- $$ Precisão = \frac{TP + TN}{P + N} $$
+ $$ Precis\tilde{a}o = \frac{TP + TN}{P + N} $$
  $$ TP_{rate} = \frac{TP}{P} $$
  $$ FP_{rate} = \frac{FP}{N} $$
 
@@ -51,8 +51,43 @@ retorna um único ponto no espaço ROC. Se o ponto estiver localizado na coorden
 \ref{fig:roc}, significa que nenhum caso foi considerado inofensivo. Classificadores que se encontram próximos ao eixo
 $y$ podem ser considerados "conservadores", uma vez que necessitam de forte evidência para categorizar uma ocorrência
 como positiva. Em contrapartida, o ponto B, posicionado em (1,1), representa sistemas que não acusaria nenhuma
-conexão como anômala. Classificadores mais À direita do gráfico podem ser considerados "liberais" pois presumem como
+conexão como anômala. Classificadores mais à direita do gráfico podem ser considerados "liberais" pois presumem como
 positivo mais facilmente.
+
+\begin{figure}
+  \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$FP_{rate}$},
+            ylabel={$TP_{rate}$},
+            xmin=0, xmax=1,
+            ymin=0, ymax=1,
+            ymajorgrids=true,
+        ]
+            \addplot[
+                color=black!30,
+                ]
+                coordinates {
+                (0,0)(1,1)
+                };
+
+            \addplot [ color=blue, mark=*, nodes near coords=A, every node near coord/.style={anchor=180}]
+                coordinates {( 0, 0)};
+            \addplot [ color=blue, mark=*, nodes near coords=B, every node near coord/.style={anchor=180}]
+                coordinates {( 1, 1)};
+            \addplot [ color=blue, mark=*, nodes near coords=C, every node near coord/.style={anchor=180}]
+                coordinates {( 0, 1)};
+            \addplot [ color=blue, mark=*, nodes near coords=D, every node near coord/.style={anchor=180}]
+                coordinates {( 0.2, 0.8)};
+            \addplot [ color=blue, mark=*, nodes near coords=E, every node near coord/.style={anchor=180}]
+                coordinates {( 0.8, 0.2)};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Exemplo da distribuição de 5 classificadores}
+    \label{fig:roc}
+\end{figure}
+
 \par Um classificador perfeito resultaria no ponto (0,1), onde C se encontra. Isso significaria possuir $FP_{rate}$ de
 0\% e $TP_{rate}$ de 100\%, ou seja, todas as conexões intrusivas serem detectadas e nenhuma conexão normal ser
 bloqueada pelo sistema. Assim sendo, quanto maior o $TP_{rate}$ e menor o $FP_{rate}$, mais preciso é o algoritmo.
@@ -97,11 +132,13 @@ aprendizado de máquinas em se adaptar a novas realidades e detectar ameaças to
 \par Através de simulações de rede, foi gerado um conjunto de dados, contendo conexões normais e anômalas,
 dispostos em três grupos distintos, os quais chamaremos de \textit{Inicial}, \textit{Análogo} e \textit{Desconhecido}.
 O primeiro é um limitado conjunto de conexões provenientes de conexões HTTP e SMTP. Este foi dividido em dois grupos:
-um para treino e outro para testes. O grupo \textit{Análogo}, como o nome sugere possui ataques semelhantes ou derivados
- daqueles no grupo anterior. Já o terceiro, possui também ataques completamente desconhecidos provenientes de outros
-protocolos, como SNMP e SSH. Apenas o grupo \textit{Inicial} foi utilizado para treino. O objetivo é ver o comportamento do sistema quando novos
+um para treino, com $258880$ instâncias, e outro para testes, com $275204$. O grupo \textit{Análogo} possui dados de
+$148343$ conexões e, como o nome sugere, possui ataques semelhantes ou derivados daqueles no grupo anterior.
+Já o terceiro, engloba, também, ataques completamente desconhecidos provenientes de outros
+protocolos, como SNMP e SSH, totalizando $276548$ ocorrências. Apenas o grupo \textit{Inicial} foi utilizado para
+treino. O objetivo é observar o comportamento do sistema quando novos
 ataques são recebidos, sejam eles derivados dos conhecidos ou completamente novos.
-\par Tanto o SVM quanto DT foram utilizados nesta análise. As tabelas \ref{tab:dt} e \ref{tab:svm} mostram os resultados
+\par Tanto o SVM quanto DT foram utilizados nesta análise. A tabela \ref{tab:dt} mostra os resultados
 em cada etapa do processo, em termos de taxa de Verdadeiro Positivo, taxa de Falso Positivo, tempo para classificar
 todas as instâncias da respectiva base, precisão e porcentagem de instâncias classificadas corretamente. As taxas de
 acerto evidenciam uma grande perda de confiabilidade conforme o surgimento de novos ataques, sendo a classificação da
@@ -115,25 +152,25 @@ base \textit{Desconhecido} praticamente tão eficiente quanto uma adivinhação 
         \cline{2-6}
                                                                    & \multicolumn{5}{c|}{\cellcolor[HTML]{EFEFEF}DT}        \\ \cline{2-6}
                                                                    & $TP_{rate}$ & $FP_{rate}$ & Tempo & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 1.0         & 0.0         & 5.75s & 99.98\% & 1.0      \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.848       & 0.429       & 3.1s  & 84.82\% & 0.914    \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.499       & 0.501       & 5.78s & 49.86\% & 0.414    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.982       & 0.018       & 6.92s & 98.18\% & 0.982    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.912       & 0.856       & 3.73s  & 91.23\% & 0.885    \\ \hline
+        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.503       & 0.497       & 6.95s & 50.29\% & 0.751    \\ \hline
     \end{tabular}
 \end{table}
 
-\begin{table}[h]
-    \centering
-    \caption{Resultados de SVM em cada base}
-    \label{tab:svm}
-    \begin{tabular}{l|l|l|l|l|l|}
-        \cline{2-6}
-                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
-                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.503       & 0.502       & 14h45min & 98.43\%  & 0.75     \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 90.78\%  & 0.937    \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.78\%  & 0.75     \\ \hline
-    \end{tabular}
-\end{table}
+%\begin{table}[h]
+%    \centering
+%    \caption{Resultados de SVM em cada base}
+%    \label{tab:svm}
+%    \begin{tabular}{l|l|l|l|l|l|}
+%        \cline{2-6}
+%                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
+%                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.984       & 0.016       & 15h13min & 98.43\%  & 0.984     \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.902       & 0.845       & 8h12min  & 90.27\%  & 0.891    \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.51        & 0.493       & 15h29min & 50.78\%  & 0.753     \\ \hline
+%    \end{tabular}
+%\end{table}
 
 
 
@@ -157,20 +194,75 @@ análise anterior.
     \end{tabular}
 \end{table}
 
-\begin{table}[h]
-    \centering
-    \caption{Resultados de SVM em cada base com seleção de atributos}
-    \label{tab:svmattrless}
-    \begin{tabular}{l|l|l|l|l|l|}
-        \cline{2-6}
-                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
-                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.503       & 0.502       & 14h45min & 50.3\%  & 0.75     \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 6.78\%  & 0.937    \\ \hline
-        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.0\%  & 0.75     \\ \hline
-    \end{tabular}
-\end{table}
+%\begin{table}[h]
+%    \centering
+%    \caption{Resultados de SVM em cada base com seleção de atributos}
+%    \label{tab:svmattrless}
+%    \begin{tabular}{l|l|l|l|l|l|}
+%        \cline{2-6}
+%                                                                   & \multicolumn{5}{c|}{\cellcolor[HTML]{C0C0C0}SVM}          \\ \cline{2-6}
+%                                                                   & $TP_{rate}$ & $FP_{rate}$ & Tempo    & Acertos & Precisão \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Inicial}      & 0.503       & 0.502       & 14h45min & 50.3\%  & 0.75     \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Análogo}      & 0.068       & 0.068       & 7h56min  & 6.78\%  & 0.937    \\ \hline
+%        \multicolumn{1}{|l|}{\cellcolor[HTML]{EFEFEF}Desconhecido} & 0.5         & 0.5         & 14h51min & 50.0\%  & 0.75     \\ \hline
+%    \end{tabular}
+%\end{table}
 
-As tabelas \ref{tab:dtattrless} e \ref{tab:svmattrless} mostram que o resultado dos algoritmos nesse
+A tabela \ref{tab:dtattrless}} mostrm que o resultado do algoritmo nesse
 cenário teve nenhum ganho significativo. Enquanto os atributos selecionados podem ser mais descritivos para os
 atques vistos na base \textit{Inicial}, talvez não sejam interessantes para identificar os ataques correntes.
+
+\begin{figure}
+  \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$FP_{rate}$},
+            ylabel={$TP_{rate}$},
+            xmin=0, xmax=1,
+            ymin=0, ymax=1,
+            ymajorgrids=true,
+        ]
+            \addplot[
+                color=black!30,
+                ]
+                coordinates {
+                (0,0)(1,1)
+                };
+
+            %  DT
+            \addplot [ color=blue, mark=*, nodes near coords=DT-I1, every node near coord/.style={anchor=180}]
+                coordinates {( 0.018, 0.982)};
+            \addplot [ color=blue, mark=*, nodes near coords=DT-A1, every node near coord/.style={anchor=180}]
+                coordinates {( 0.856, 0.912 )};
+            \addplot [ color=blue, mark=*, nodes near coords=DT-D1, every node near coord/.style={anchor=180}]
+                coordinates {( 0.497, 0.503 )};
+
+%            %  SVM
+%            \addplot [ color=blue, mark=*, nodes near coords=SVM-I1, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.502, 0.503)};
+%            \addplot [ color=blue, mark=*, nodes near coords=SVM-A1, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.068, 0.068)};
+%            \addplot [ color=blue, mark=*, nodes near coords=SVM-D1, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.5, 0.5)};
+
+            %  DT_attrless
+            \addplot [ color=blue, mark=o, nodes near coords=DT-I2, every node near coord/.style={anchor=180}]
+                coordinates {( 0, 1)};
+            \addplot [ color=blue, mark=o, nodes near coords=DT-A2, every node near coord/.style={anchor=180}]
+                coordinates {( 0.429, 0.848)};
+            \addplot [ color=blue, mark=o, nodes near coords=DT-D2, every node near coord/.style={anchor=180}]
+                coordinates {( 0.501, 0.499)};
+
+%            %  SVM
+%            \addplot [ color=blue, mark=o, nodes near coords=SVM-I2, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.502, 0.503)};
+%            \addplot [ color=blue, mark=o, nodes near coords=SVM-A2, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.068, 0.068)};
+%            \addplot [ color=blue, mark=o, nodes near coords=SVM-D2, every node near coord/.style={anchor=180}]
+%                coordinates {( 0.5, 0.5)};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Exemplo da distribuição de 5 classificadores}
+    \label{fig:roc}
+\end{figure}
