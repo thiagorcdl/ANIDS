@@ -1,7 +1,7 @@
 \chapter{Análise de Trabalhos Relacionados}
 \label{ch:analise}
 
-NIDS baseado em anomalia têm se mostrado um a área de estudo promissora, mas ainda necessita de bastante pesquisa.
+NIDS baseado em anomalia têm se mostrado uma área de estudo promissora, mas ainda necessita de bastante pesquisa.
 Analisando os dados de artigos publicados entre os anos 2000 e 2007 e as diferentes técnicas utilizadas \cite{tsai09},
 é possível extrair algumas inferências.
 \begin{itemize}
@@ -40,15 +40,15 @@ classificação. O algoritmo conseguiu atingir uma precisão de 99,6\%, o que re
 \subsection{Support Vector Machine}
 SVM trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
 Ele se baseia em minimizar o risco estrutural. Os dados de enrada são mapeados por uma \textit{função núcleo}, a qual
-é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última é
+é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última
 é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade. SA é aplicado para escolher
 os melhores valores para os parâmetros usados na função \textit{radial basis}.
 
 \subsection{Árvore de Decisão}
-DT é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista. Ele
-cria uma árvore de decisão contando um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
+DT (\emph{Decision Tree}) é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista. Ele
+cria uma árvore de decisão contando com um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
 nós internos, que correspondem às características; arestas, que são os possíveis valores de cada característica; e
-folhas, que contêm a classe a ser atribuídao ao caso de teste.
+folhas, que contêm a classe a ser atribuída ao caso de teste.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -70,5 +70,5 @@ vez diretamente em um FPGA, fazendo uso de seu potencial de processamento parale
 \end{enumerate}
 \par A base utilizada para testes foi a \textit{MINIST Dataset}. Comparando com testes prévios em GPU, o design
 \textit{Heterogeneous Baseline Classifier} processou os dados 7 vezes mais rápido. Os melhores resultados foram
-obtidos usando \textit{Reconfigurable Cascade Chain}, com um ganho de 20 vezes, isto é, levando apenas 5% do tempo
+obtidos usando \textit{Reconfigurable Cascade Chain}, com um ganho de 20 vezes, isto é, levando apenas 5\% do tempo
 que a GPU consumiu.

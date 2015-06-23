@@ -43,13 +43,13 @@ principalmente porque diversos ataques da atualidade não são direcionados à r
 ela.
 \par NIDS devem utilizar características baseadas em conteúdo, extraídas do corpo dos pacotes, para detectar tais tipos 
 de ataques, uma vez que cabeçalhos podem aparentar completamente normais. Análise de conteúdo é computacionalmente 
-mais cara do que análsie de cabeçalho porque requer uma inspeção mais profunda do pacote. Ela lida com uma variedade de 
+mais cara do que análise de cabeçalho porque requer uma inspeção mais profunda do pacote. Ela lida com uma variedade de
 tipo de conteúdo (pdf, jpg, HTML), compressão, e métodos que encobrem dados. Entretanto, o benefício da análise do
-corpo é ter acesso a todos os bytes transferidos entre os aparelhos na rede, permitindo a cosntrução de um rico
+corpo é ter acesso a todos os bytes transferidos entre os dispositivos na rede, permitindo a construção de um rico
 conjunto de características baseadas em conteúdo para detecção de anomalia.
 \par Como análise de conteúdo possui uma alta complexidade, diversos métodos focam em pequenos subconjuntos de
 conteúdo, como requisições HTTP ou apenas o JavaScript de um conteúdo baixado. Métodos baseados em anomalia não tentam
-comparar assinatoras de malware conhecido, mas podem aplicar heurísticas, como Casamento de Padrões para detectar a
+comparar assinaturas de malware conhecido, mas podem aplicar heurísticas, como Casamento de Padrões para detectar a
 presença de código shell.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,21 +58,21 @@ presença de código shell.
 \subsection{Conexões múltiplas}
 Grande parte dos NIDS analisados em \cite{davis11} usam dados de rede referentes a fluxo ou sessão. Características
 são construídas a partir do fluxo. O método mais popular é o de cabeçalho de pacotes utilizando características
-derivadas de múltiplas conexões (MCD). Essas características são geralmente divididas usando média, desvio padrão, e
-procentagem de fluxos, cobrindo múltiplas sessões. NIDS baseados em anomalia que utilizam essas caracterśiticas são
+derivadas de múltiplas conexões (MCD). Esses atributos são geralmente derivados usando média, desvio padrão, e
+porcentagem de fluxos, cobrindo múltiplas sessões. NIDS baseados em anomalia que utilizam essas caracterśiticas são
 capazes de discernir entre atividade normal da rede e tráfego incomum como \textit{DoS} e \textit{scanning}.
 \par características MCD são geralmente extraídas a partir de conexões dentro de um intervalo de tempo. A maioria das
- características de MCD são baseadas em volume, como o a quantidade de conexões a um endereço de IP e porta
+ Características de MCD são baseadas em volume, como o a quantidade de conexões a um endereço de IP e porta
  em um espaço de tempo. Portanto, características derivadas de múltiplas conexões podem ser facilmente usados para detectar
  volumes excessivos de tráfego relacionados a \textit{DoS} e \textit{probing}. Como pacotes anômalos individuais não
  suprem o valor baseado em volume, eles podem ser ignorados.
 
-\subsection{Única conexão}
-Características derivadas de conexões individuais (SCD) são utilziadas para detectar comportamento anômalo dentro de
-uma úncia sessão. Elas podem apontar um protocolo inesperado, tamanhos incomuns de dados, timestamp não condizente,
+\subsection{Conexão individual}
+Características derivadas de conexões individuais (SCD) são utilizadas para detectar comportamento anômalo dentro de
+uma úncia sessão. Elas podem apontar um protocolo inesperado, tamanhos incomuns de dados, \emph{timestamp} não condizente,
 ou sequências incomuns de \textit{flags} de TCP. Portanto, características SCD permitem detecção de uso anômalo da rede
 por \textit{backdoors}, túnel HTTP e afins.
-\par As características SCD fornecem contexto que pode ser usado para encotnrar anomalias não contextuais. Por exemplo, se a
+\par As características SCD fornecem contexto que pode ser usado para encontrar anomalias não contextuais. Por exemplo, se a
 temporização de pacotes dentro de uma porta monitorada não se encaixa com um perfil esperado, um alerta pode ser
 disparado, uma vez que pode se tratar de um protocolo de tunelamento.
 
@@ -82,9 +82,9 @@ O KDD Cup 99 se trata de uma base dados para uso livre. Ela possui 32 caracterí
 \textit{remote to local}.  Tais características foram construídas por um especialista e involvem informações de mais
 alto nível, como o número de tentativas de login sem sucesso, se acesso root ao terminal foi conseguido,
 e o número de operações de criação de arquivo.
-\par Consdierando que o KDD Cup 99 já tem mais de 15 anos, é provável que essas características não sejam mais úteis
+\par Considerando que o KDD Cup 99 já tem mais de 15 anos, é provável que essas características não sejam mais úteis
 para detectar os tipos de ataques recentes na realidade do fluxo de dados na rede atualmente. Para se detectar
-ameaças atuais, é necessário construir características baseadas em conteúdo novas, uma vez que o conteúdo em si mudou.
+ameaças atuais, é necessário construir novas características baseadas em conteúdo, uma vez que o conteúdo em si mudou.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -100,13 +100,13 @@ em \cite{davis11}.
 \subsection{Derivação}
 Dfierentes tipos de características que podem ser usados em NIDS baseados em anomalia foram cobertos em \cite{davis11}.
 Cada tipo de característica é derivada de vários métodos de pré-processamento, incluindo organizar pacotes em fluxos,
-analizar conteúdo de aplicações em busca de campos de interesse ou percorrer cabeçalhos de cada pacote. A derivação do
+analisar conteúdo de aplicações em busca de campos de interesse ou percorrer cabeçalhos de cada pacote. A derivação do
 potencial conjunto de características é um passo essencial para o NIDS baseado em anomalia. Analogamente,
 pré-processamentos subsequentes podem ajudar ainda mais a aumentar a eficiência do NIDS.
 \par Métodos de pré-processamento de mineiração de dados podem ser usados, incluindo tranformação, redução e
-discretização de dados, como os apresentados em \cite{ribeiro08}. Uma técnica de redução geralmente utilziada é a
-\textit{Principal Component Analysis}. PCA tem se mostrado útil para redução da dimensionaldiade dos dados,
-consequentemente redizindo o custo computacional do sistema de detecção
+discretização de dados, como os apresentados em \cite{ribeiro08}. Uma técnica de redução geralmente utilizada é a
+\textit{Principal Component Analysis}. PCA tem se mostrado útil para redução da dimensionalidade dos dados,
+consequentemente reduzindo o custo computacional do sistema de detecção
 \par Para eliminar características redundantes, diversos algoritmos automatizados para seleção de características
 também existem, resultando em redução de dados similar. Tais métodos de redução de dados fornecem um meio preciso para
 a conversão de um conjunto candidato para o conjunto final de características. É possível que métodos automáticos de
@@ -114,14 +114,14 @@ redução possam melhorar ainda mais o NIDS, apesar de que alguns sistemas são 
 conhecimento de um especialista para construir conjuntos de características significativos.
 
 \subsection{Alternativas de processamento}
-Considerando métodos que almejam maior automatização na momento do processamento dos dados e características, existem
+Considerando métodos que almejam maior automatização no momento do processamento dos dados e características, existem
 duas ferramentas aparentemente promissoras: N-grams e libAnomaly. N-grams pode ser usado com algoritmos de seleção
 automática de características, enquanto o libAnomaly se trata de uma biblioteca livre para modelos de pré-processamento
 de dados.
-\par No N-grams, perfis são construídos para diferentes tipso de arquivos, calculando as distribuições de frequência
+\par No N-grams, perfis são construídos para diferentes tipos de arquivos, calculando as distribuições de frequência
 de byte \cite{zhuowei03}. O NIDS compara, então, o tráfego observado com os perfis usando Distância Manhattan. N-gram é geralmente
-usado para analsiar requisições ao servidor. É útil em detectar padrões anômalos, como código shell dentro de
-protocolos estruturados de aplicações, sem exigir supervisão muita supervisão.
+usado para analisar requisições ao servidor. É útil em detectar padrões anômalos, como código shell dentro de
+protocolos estruturados de aplicações, sem exigir muita supervisão.
 \par O foco do libAnomaly, por sua vez, é construir um punhado de modelos representando a transferência normal de
 dados entre usuário e aplicação web. Requisições maliciosas provavelmente serão apontadas como anômalas quando
 comparadas com um ou mais modelos, pois geralmente se diferem de requisições normais de alguma forma.
