@@ -3,7 +3,7 @@
  A técnica de detecção de anomalia analisa o atual comportamento da rede para checar se corresponde ou não a um
  comportamento normal. O maior benefício desse método é a habilidade de identificar novos ataques com sucesso.
  A desvantagem é a alta taxa de Falso Positivo. Ao invés de requerer um novo modelo a ser adaptado, sistemas baseados
- em anomalia necessitam de dados de tráfego de rede sem livres de ataques. \textit{Data mining} também tem sido
+ em anomalia necessitam de dados de tráfego de rede livres de ataques. \textit{Data mining} também tem sido
  utilizado em sistemas baseados em anomalia, junto a outros métodos estatísticos e de \textit{Machine Learning}
  (aprendizado de máquina).
  \par As diferentes técnicas podem ser agrupadas em três categorias, de acordo com o processamento envolvido:
@@ -12,14 +12,14 @@
 \section{Técninas Estatísticas}
 Um modelo de probabilidade de um determinado comportamento é criado a partir da atividade capturada do tráfego de rede,
  tal como taxa de tráfego, número de pacotes e quantidade de endereços de IP distintos.
- \par Ele não requer conehcimento prévio pois está capacitado a aprender o comportamento normal a partir de observações
+ \par Ele não requer conhecimento prévio pois está capacitado a aprender o comportamento normal a partir de observações
  sem ataques. Outro benefício das técnicas estatísticas é a possibilidade de identificar, com precisão, atividades
  maliciosas que ocorrem ao longo de períodos de tempo mais extensos. Por outro lado, nem todos os possíveis
  comportamentos conseguem ser modelados e o equilíbrio entre taxas de Falso Positivo e Falso Negativo dependem
  fortemente na configuração correta dos parâmetros.
 
  \section{Técnicas Baseadas em Conhecimento}
- Também chamados de expert systems, sistemas baseados em conhecimento são implementados criando-se um conjunto de
+ Também chamados de \emph{expert systems}, sistemas baseados em conhecimento são implementados criando-se um conjunto de
  regras de classificação para categorizar os dados. O modelo é geralmente criado por um humano experiente no campo
  da aplicação. Esse tipo de sistema não aponta novas atividades inofensivas como sendo maliciosas, garantindo, assim,
  um número reduzido de Falso Positivo. Por essa razão, o conjunto de regras precisa ser específico o suficiente e,
@@ -27,24 +27,24 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
  grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
 
  \section{Técnicas de Machine Learning}
- Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o comportamento esperado do
- modelo. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
+ Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o mdoelo do comportamento
+ esperado. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
  novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
  do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
  \begin{itemize}
-    \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características
-    \item Modelos de Markov -- comapra a probabilidade dos dados observados com um threshold definido
-    \item Redes neurais -- cria um rede de perceptrons com habilidade de se adaptar
-    \item Lógica Fuzzy -- enxerga características como variáveis fuzzy e classifica com base em valores contínuos
-    \item Algoritmos Genéticos -- deriva regras de classificação e seleciona as características mais discriminantes
-    \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação
+    \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características.
+    \item Modelos de Markov -- compara a probabilidade dos dados observados com um \emph{threshold} definido.
+    \item Redes neurais -- cria um rede de \emph{perceptrons} com habilidade de se adaptar.
+    \item Lógica Fuzzy -- enxerga características como variáveis \emph{fuzzy} e classifica com base em valores contínuos.
+    \item Algoritmos Genéticos -- deriva regras de classificação e seleciona as características mais discriminantes.
+    \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação.
     \item Árvores de Decisão -- cria uma árvore onde cada folha representa uma classe e arestas correspondem a
-        diferentes valores de atributos
+        diferentes valores de atributos.
     \item Clustering -- algoritmo não-supervisionado que agrupa dados com base em suas similaridades.
 \end{itemize}
 
 \section{Combinação de Classificadores}
-Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante estudada no meio acadêmico é a
+Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante estudada no meio acadêmico é a
  combinação de classificadores. Tais combinações podem se dar de diversas maneiras, como por exemplo: Classificadores
  Híbridos, Composição de Classificadores \footnote{Tradução livre do termo em inglês Ensemble Classifiers.} e
  Classificadores em Cascata.
@@ -60,7 +60,7 @@ Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante 
  \subsection{Classificadores em Cascata}
     Pode ser considerado uma extensão dos classificadores híbridos, podendo consistir de inúmeros classificadores, onde
     o n-ésimo classificador utiliza como entrada os dados rejeitados pelo classificador anterior, ou seja, que não
-    atingiram um grau de certeza satisfatório. Alguns estudos sugerem otimização de thresholds para aumentar precisão
+    atingiram um grau de certeza satisfatório. Alguns estudos sugerem otimização de \emph{thresholds} para aumentar precisão
     \cite{oliveira05}.
 
  \subsection{Composição de Classificadores}
@@ -85,14 +85,14 @@ Como cada método possui seus pontos fortes e pontos fracos. Uma ideia bastante 
          conexões) e "payload" (obtidos da carga do pacote).
         \item Detector de incidente -- identifica atividades intrusivas. Pode ser tanto baseado em assinatura quanto em
         anomalia.
-        \item Gerador de modelo de tráfego -- contei informação base usada para guiar o detector de incidente.
+        \item Gerador de modelo de tráfego -- contém informação base usada para guiar o detector de incidente.
         \item Gerenciamento de resposta -- inicia manobras para superar uma intrusão em potencial. É inicializado pelo
         detector de incidente.
     \end{itemize}
 
  \section{Comercialmente}
  Um dos primeiros projetos de detecção de anomalia a ser amplamente conhecido foi o SPADE, um plugin para o Snort que
- anhalisava transferência de pacotes procurando comportamentos fora do comum. Alternativamente, Stealthwatch utilizava
+ analisava transferência de pacotes procurando comportamentos fora do comum. Alternativamente, Stealthwatch utilizava
  detecção de anomalia baseada em fluxo.
  \par Sistemas recentes usam um arquitetura distribuída utilizando sensores e um
  console central para gerenciar o processo de detecção. Esse é o caso do DeepSight, que usa um método estatístico.

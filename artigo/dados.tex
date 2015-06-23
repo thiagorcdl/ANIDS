@@ -20,15 +20,15 @@ A escolha de informações da rede é amplamente afetada pelos requisitos de det
 Para um sistema mais genérico, o ideal seria utilizar detectores separados utilizando conjuntos de características
 distintos, um para cada especificidade. Dependendo da origem desses dados, têm-se algumas vantagens e desvantagens.
 Técnicas para análise de conteúdo ainda não estão tão concretizadas quanto as que extraem características de
-cabeçalhos. Assim comoanalisar conteúdo do lado do cliente ainda é um campo não tão estudado quanto o lado do servidor
+cabeçalhos, assim como analisar conteúdo do lado do cliente ainda é um campo não tão estudado quanto o lado do servidor
 numa perspectiva de A-NIDS. Técnicas do lado do cliente almejam detectar ameaças em aplicações web, como \textit{drive-by
 downloads}, \textit{cross-site scripting} e trechos maliciosos de JavaScript.
 
 \subsection{Cabeçalho de pacote}
-Características obtidas através de  cabeçalhos de pacotes têm a qualidade de serem rápidos, sem exigir muito
+O conjunto de característica mais simples contém atributos básicos extraídos dos cabeçalhos.
+Características obtidas através de  cabeçalhos de pacotes têm a qualidade de serem de rápida extração, sem exigir muito
 processamento ou memória, e evitarem preocupações legais acerca de análise de dados da rede.
-O conjunto de característica mais simples contém características básicas extraídas dos cabeçalhos. Essas
-características podem ser usadas para apontar pacotes individuais que são anômalos quando comaprados ao modelo de
+Essas características podem ser usadas para apontar pacotes individuais que são anômalos quando comaprados ao modelo de
 treino; ou como um processo de filtragem para que apenas pacotes incomuns sejam usados por algoritmos de detecção
 posteriores.
 Entretanto, pacotes individuais não podem ser usados para identificar padrões incomuns durante um grande período.
