@@ -2,11 +2,11 @@
 Três baterias de testes foram conduzidas ao longo da produção deste trabalho de graduação a fim de ver na prática o
 impacto dos algoritmos de aprendizado de máquina quando aplicados em bases de dados com informações de rede.
 Em um dos testes, a base utilizada foi a supracitada KDD Cup 99. Para os outros, utilizou-se uma série de dados
- gerados pelo mestrando da PUC-PR Eduardo Viegas, orientado pelo Pr. Dr. Altair Santin. Em ambos os casos, os algoritmos foram
+ gerados pelo mestrando da PUC-PR Eduardo Viegas, orientado pelo Prof. Dr. Altair Santin. Em ambos os casos, os algoritmos foram
  executados através do Weka.
 
 \section{Weka}
-O \textit{Waikato Environment for Knowledge Analysis} (Weka) é uma suíte de aplicações para aprendizagemd e máquina e
+O \textit{Waikato Environment for Knowledge Analysis} (Weka) é uma suíte de aplicações para aprendizagem de máquina e
 mineiração de dados. O software foi desenvolvido em Java na \textit{University of Waikato} e lincenciado sob a
 \textit{GNU General Public License}. Os destaques dessa ferramenta incluem a vasta quantidade de algoritmos
 implementados, pré-processamento de dados, seleção de atributos e visualização de dados. O Weka funciona como uma
@@ -15,10 +15,10 @@ resultados interativos \cite{bouckaert10}.
 
 \section{Avaliação de Performance}
 Gráficos ROC (\textit{Receiver Operating Characterístics}) são comumente usados como um método  para visualizar
-a performance de classificadores e analisar as taxas de acertos e alarmes falsos \cite{fawcett04}. A Um gráfico ROC
+a performance de classificadores e analisar as taxas de acertos e alarmes falsos \cite{fawcett04}. Um gráfico ROC
 baseia-se em apenas duas classes: positivo ou negativo. Em termos de detecção de intrusão, uma conexão pode ser
 considerada inofensiva (positivo) ou prejudicial (negativa). Para avaliar a precisão de um classificador,
-duas outras categorias podem ser usadas: verdadeiro ou falso. Quando cruzadas, obtém-se quatro possíveis resultados,
+duas outras categorias podem ser usadas: verdadeiro e falso. Quando cruzadas, obtém-se quatro possíveis resultados,
 como mostra a tabela \ref{tab:tfpn}.
 
 \begin{table}[h]
@@ -34,7 +34,7 @@ como mostra a tabela \ref{tab:tfpn}.
 \end{table}
 
 Quando se sabe a verdadeira natureza dos casos de teste, é possível determinar a precisão, a taxa de Verdadeiro Positivo
- ($TP_{rate}$) e taca de Falso Positivo ($FP_{rate}$). É possível inferir que uma das maiores preocupações ao se construir
+ ($TP_{rate}$) e taxa de Falso Positivo ($FP_{rate}$). É possível inferir que uma das maiores preocupações ao se construir
  um A-NIDS é a minimização a taxa de Falso Positivo. Teoricamente se 100\% das conexões forem consideradas anômalas
  e bloqueadas, teremos $FP_{rate}$ igual a 0. Por um lado, o sistema estaria bloqueando conexões inofensivas, por outro,
  estaria com certeza evitando conexões ameaçadores. O cálculo das taxas se dá da seguinte maneira.
@@ -46,11 +46,11 @@ Quando se sabe a verdadeira natureza dos casos de teste, é possível determinar
 Essas taxas estão contidas no espaço entre $0$ e $1$, inclusivo, e são utilizadas para plotar o ROC. A $TP_{rate}$ é
 usado no eixo $y$ e a $FP_{rate}$, no eixo $x$. Portanto, o gráfico ROC elicita a relação entre Verdadeiro Positivo e
 Falso Positivo.
-\par A \ref{fig:roc} mostra uma curva ROC simples com 5 classificadores fictícios: A, B, C, D e E. Cada classificador
+\par A Figura \ref{fig:roc} mostra uma curva ROC simples com 5 classificadores fictícios: A, B, C, D e E. Cada classificador
 retorna um único ponto no espaço ROC. Se o ponto estiver localizado na coordenada (0,0), como o classificador A na
-\ref{fig:roc}, significa que nenhum caso foi considerado inofensivo. Classificadores que se encontram próximos ao eixo
+Figura \ref{fig:roc}, significa que nenhum caso foi considerado inofensivo. Classificadores que se encontram próximos ao eixo
 $y$ podem ser considerados "conservadores", uma vez que necessitam de forte evidência para categorizar uma ocorrência
-como positiva. Em contrapartida, o ponto B, posicionado em (1,1), representa sistemas que não acusaria nenhuma
+como positiva. Em contrapartida, o ponto B, posicionado em (1,1), representa sistemas que não acusariam nenhuma
 conexão como anômala. Classificadores mais à direita do gráfico podem ser considerados "liberais" pois presumem como
 positivo mais facilmente.
 
@@ -123,7 +123,7 @@ $0.001$ e função núcleo \textit{Radial Basis}.
 \par A \ref{tab:partic} mostra os as proporções de base de testes e treino em cada particionamento e seus respectivos
 resultados. É possível notar uma clara correlação entre o tamanho da base de treino e a porcentagem de acertos. O
 melhor resultado foi de $99.64$\% quando metade da base foi usada para gerar o modelo. Entretanto, em uma situação real
-não dados disponíveis o suficiente para se representar metade das transmissões que ocorrem diariamente.
+não há dados disponíveis o suficiente para se representar metade das transmissões que ocorrem diariamente.
 
 
 \section{Impacto da imprevisibilidade}
@@ -131,10 +131,10 @@ Uma abordagem recente direcionou os estudos desse trabalho para a análise da re
 aprendizado de máquinas em se adaptar a novas realidades e detectar ameaças totalmente desconhecidas \cite{sommer10}.
 \par Através de simulações de rede, foi gerado um conjunto de dados, contendo conexões normais e anômalas,
 dispostos em três grupos distintos, os quais chamaremos de \textit{Inicial}, \textit{Análogo} e \textit{Desconhecido}.
-O primeiro é um limitado conjunto de conexões provenientes de conexões HTTP e SMTP. Este foi dividido em dois grupos:
+O primeiro é um limitado conjunto de conexões utilizando protocolos HTTP e SMTP. Este foi dividido em dois grupos:
 um para treino, com $258880$ instâncias, e outro para testes, com $275204$. O grupo \textit{Análogo} possui dados de
 $148343$ conexões e, como o nome sugere, possui ataques semelhantes ou derivados daqueles no grupo anterior.
-Já o terceiro, engloba, também, ataques completamente desconhecidos provenientes de outros
+Já o terceiro engloba, também, ataques completamente desconhecidos provenientes de outros
 protocolos, como SNMP e SSH, totalizando $276548$ ocorrências. Apenas o grupo \textit{Inicial} foi utilizado para
 treino. O objetivo é observar o comportamento do sistema quando novos
 ataques são recebidos, sejam eles derivados dos conhecidos ou completamente novos.
@@ -210,7 +210,7 @@ análise anterior.
 
 As tabelas \ref{tab:dtattrless} e \ref{tab:svmattrless} mostram que o resultado dos algoritmos nesse
 cenário teve nenhum ganho significativo. Enquanto os atributos selecionados podem ser mais descritivos para os
-atques vistos na base \textit{Inicial}, talvez não sejam interessantes para identificar os ataques correntes.
+ataques vistos na base \textit{Inicial}, talvez não sejam interessantes para identificar os ataques correntes.
  A figura \ref{fig:roctest} evidencia uma diminuição de Falso Positivo na base \emph{Análogo}
  quando usada a seleção de atributo, mas ainda sendo muito superior ao \textit{Inicial}. O comportamento
  ao se classificar a base totalmente desconhecida mostrou-se tão bom quanto escolha aleatória.
