@@ -4,7 +4,7 @@
  comportamento normal. O maior benefício desse método é a habilidade de identificar novos ataques com sucesso.
  A desvantagem é a alta taxa de Falso Positivo. Ao invés de requerer um novo modelo a ser adaptado, sistemas baseados
  em anomalia necessitam de dados de tráfego de rede livres de ataques. \textit{Data mining} também tem sido
- utilizado em sistemas baseados em anomalia, junto a outros métodos estatísticos e de \textit{Machine Learning}
+ utilizado em sistemas baseados em anomalia, junto a outros métodos estatísticos e de \textit{machine learning}
  (aprendizado de máquina).
  \par As diferentes técnicas podem ser agrupadas em três categorias, de acordo com o processamento envolvido:
  estatístico, knowledge-based (baseado em conhecimento) ou algoritmos de aprendizado de máquina.
@@ -27,14 +27,14 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
  grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
 
  \section{Técnicas de Machine Learning}
- Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o mdoelo do comportamento
+ Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o modelo do comportamento
  esperado. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
  novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
  do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
  \begin{itemize}
     \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características.
     \item Modelos de Markov -- compara a probabilidade dos dados observados com um \emph{threshold} definido.
-    \item Redes neurais -- cria um rede de \emph{perceptrons} com habilidade de se adaptar.
+    \item Redes neurais -- cria uma rede de \emph{perceptrons} com habilidade de se adaptar.
     \item Lógica Fuzzy -- enxerga características como variáveis \emph{fuzzy} e classifica com base em valores contínuos.
     \item Algoritmos Genéticos -- deriva regras de classificação e seleciona as características mais discriminantes.
     \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação.
@@ -70,13 +70,13 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
 
 
 \chapter{Sistemas A-NIDS funcionais}
-    O estudo feito em \cite{teodoro09} apresenta sistemas A-NIDS dividos em duas categorias: comerciais e de pesquisa.
+    O estudo feito em \cite{teodoro09} apresenta sistemas A-NIDS divididos em duas categorias: comerciais e de pesquisa.
     Sistemas comerciais geralmente trabalham com um núcleo baseado em assinatura, enquanto sistemas de pesquisa
-    protótipos e metodologias inovadoras.
+    desenvolvem protótipos e buscam metodologias inovadoras.
 
  \section{Arquitetura}
-    Enquanto alguns detalhes de implementação podem variar, a base da esquematização de um A-NIDS é como apresentado em
-    \cite{catania12}:
+    Enquanto alguns detalhes de implementação podem variar, a base da esquematização básica de um A-NIDS
+    é como apresentado em \cite{catania12}:
     \begin{itemize}
         \item Aquisição de dados de tráfego -- coleta informação sobre os quadros da rede para processamento futuro.
         \item Gerador de características do tráfego -- extrai características do tráfego capturado. Tais características
@@ -94,7 +94,7 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
  Um dos primeiros projetos de detecção de anomalia a ser amplamente conhecido foi o SPADE, um plugin para o Snort que
  analisava transferência de pacotes procurando comportamentos fora do comum. Alternativamente, Stealthwatch utilizava
  detecção de anomalia baseada em fluxo.
- \par Sistemas recentes usam um arquitetura distribuída utilizando sensores e um
+ \par Sistemas recentes usam uma arquitetura distribuída utilizando sensores e um
  console central para gerenciar o processo de detecção. Esse é o caso do DeepSight, que usa um método estatístico.
- A maioria dos sistemas comerciais utilizam um módulo de detecção baseado em assnatura aliado com um núcleo baseado em
+ A maioria dos sistemas comerciais utilizam um módulo de detecção baseado em assinatura aliado com um núcleo baseado em
  anomalia. Todos esses sistemas se enquadram na categoria de classificadores híbridos.

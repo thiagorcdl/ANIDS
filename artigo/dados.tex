@@ -1,6 +1,6 @@
 \chapter{Dados}
 \label{ch:dados}
-Os passos mais relevantes para o modelamento de dados de um NIDS são os seguintes:
+Os passos mais relevantes para o modelamento de dados de um A-NIDS são os seguintes:
 \begin{enumerate}
     \item Criação da base -- identifica dados categorizados (normal ou anômalo) representativos para treino e teste.
     Categorização de tráfego de rede pode ser uma tarefa difícil e longa, que geralmente envolve um especialista.
@@ -32,7 +32,7 @@ Essas características podem ser usadas para apontar pacotes individuais que sã
 treino; ou como um processo de filtragem para que apenas pacotes incomuns sejam usados por algoritmos de detecção
 posteriores.
 Entretanto, pacotes individuais não podem ser usados para identificar padrões incomuns durante um grande período.
-Existem ataques que contém cabeçalhos normais quando analisados individualmente, enquanto sua repetição durante
+Existem ataques que contêm cabeçalhos normais quando analisados individualmente, enquanto sua repetição durante
 um certo tempo pode ser considerada anômala. Um exemplo seria o ataque de negação de serviço, popularmente conhecido
 como \textit{DoS}.
 
