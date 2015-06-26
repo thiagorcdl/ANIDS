@@ -23,7 +23,7 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
  regras de classificação para categorizar os dados. O modelo é geralmente criado por um humano experiente no campo
  da aplicação. Esse tipo de sistema não aponta novas atividades inofensivas como sendo maliciosas, garantindo, assim,
  um número reduzido de Falso Positivo. Por essa razão, o conjunto de regras precisa ser específico o suficiente e,
- apesar de ser possível atingir um certo nível de automatização usando uma máquina de estados finitos, requer
+ apesar de ser possível atingir um certo nível de automação usando uma máquina de estados finitos, requer
  grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
 
  \section{Técnicas de Machine Learning}
@@ -53,7 +53,7 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
     Um classificador híbrido consiste de dois componentes. O primeiro pré-processa o dado de entrada e envia ao segundo
     classificador, que chega ao resultado final. O primeiro componente de classificadores híbridos pode ser usado tanto
     como uma técnica de clustering para achar as classes que o segundo componente utilizará para categorizar os dados;
-    quanto como um otimizador de performance para o segundo modelo, que corresponde ao método \textit{integrado}
+    quanto como um otimizador de performance para o segundo modelo, o que corresponderia ao método \textit{integrado}
     \cite{aydin09}.
 
 
@@ -75,7 +75,7 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
     desenvolvem protótipos e buscam metodologias inovadoras.
 
  \section{Arquitetura}
-    Enquanto alguns detalhes de implementação podem variar, a base da esquematização básica de um A-NIDS
+    Enquanto alguns detalhes de implementação podem variar, o padrão da esquematização básica de um A-NIDS
     é como apresentado em \cite{catania12}:
     \begin{itemize}
         \item Aquisição de dados de tráfego -- coleta informação sobre os quadros da rede para processamento futuro.
@@ -83,8 +83,8 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
          podem ser classificadas como "baixo nível" (obtidas diretamente do dado bruto), "alto nível" (deduzidas de um
          processamento subsequente), "pacote" (coletadas de cabeçalhos de pacotes), "fluxo" (contendo informação das
          conexões) e "payload" (obtidos da carga do pacote).
-        \item Detector de incidente -- identifica atividades intrusivas. Pode ser tanto baseado em assinatura quanto em
-        anomalia.
+        \item Detector de incidente -- identifica atividades intrusivas. Pode ou não conter um segundo núcleo baseado
+        em assinatura..
         \item Gerador de modelo de tráfego -- contém informação base usada para guiar o detector de incidente.
         \item Gerenciamento de resposta -- inicia manobras para superar uma intrusão em potencial. É inicializado pelo
         detector de incidente.
