@@ -1,0 +1,149 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage[table,xcdraw]{xcolor}
+
+\begin{document}
+
+\section{Apresentação}
+    Este trabalho de graduação tem como intuito apresentar um estudo acerca da usabilidade e viabilidade de
+    algoritmos de \textit{machine learning} em sistemas de detecção de intrusão em rede.
+    Sua utilização teria grande impacto na segurança tanto de servidores quanto de clientes,
+    pois promete evitar ataques ao sistema detectando anomalias na rede.
+
+    Vamos abordar:
+    \begin{itemize}
+        \item conceitos de sistema de detecção de intrusão e de \textit{machine learning}
+        \item a arquitetura geral de um sistema baseado em anomalia
+        \item o processo de extração e processamento de dados;
+        \item e três testes efetuados, referentes a
+        \begin{enumerate}
+            \item impacto de uma base de dados representativa
+            \item impacto de tipos de ataques desconhecidos
+            \item impacto da seleção de atributos.
+        \end{enumerate}
+        \item conclusão
+    \end{itemize}
+
+
+\section{Intro}
+    \subsection{Motivação}
+    Pode ser que eu venha a me referir pela sigla NIDS, que significa \textit{Network Intrusion Detection System},
+    mas no geral, apenas Sistema de Detecção ou até Sistema, mesmo. \par
+    Bom, roteadores e sistemas operacionais atuais vêm equipados com ferramentas básicas para previnir acesso não autorizado
+    ao computador. Ainda assim, há pessoas dedicadas a burlar tais proteções. Uma máquina conectada à rede nunca está 100\% segura.
+    Recentemente veio à tona o problema do Shellshock, que com certeza já era conhecido em alguns meios.
+    Uma coisa é um usuário baixar um vírus no windows que fica abrindo janelas, mas e o quando alguém acessa seu servidor,
+    ganha permissão root, e você nem fica sabendo. \par
+
+    \subsection{NIDS}
+    A ideia dos sistemas de detecção de intrusão é cobrir esse ponto cego, detectando automaticamente comportamentos
+    nocivos na rede, analisando o tráfego e pacotes. Atualmente, os sistemas em uso comercial são os chamados
+    baseados em assinatura. Eles tentam casar padrões com um banco de dados de assinaturas de ataques conhecidos.
+    O problema é que algumas alterações podem gerar assinaturas diferentes. Daí surgem os baseados em anomalia.
+
+
+\section{A-NIDS}
+    \subsection{Machine Learning}
+    A ideia é usar algoritmos de machine learning para que o sistema aprenda o que é o comportamento normal da rede e bloqueie quaisquer
+    conexões que sejam divergentes. Machine Learning tem aplicação em diversar áreas, como processamento de imagens e robótica.
+    A ideia geral é o seu sistema aprender algo e usar isso para executar tarefas futuras.
+    No nosso caso, é o de classificar as conexões como sendo ou "\textbf{normal}" ou "\textbf{anômala}".
+
+    Enquanto alguns detalhes de implementação podem variar, o padrão da esquematização básica de um A-NIDS
+    é o seguinte:
+    \begin{itemize}
+        \item Aquisição de dados de tráfego -- coleta informação sobre os quadros da rede para processamento futuro.
+        \item Gerador de características do tráfego -- extrai características do tráfego capturado.
+        \item Gerador de modelo de tráfego (Treino) -- contém informação base usada para guiar o detector de incidente.
+        \item Detector de incidente (Classificação) -- identifica atividades intrusivas.
+        \item Gerenciamento de resposta -- inicia manobras para superar uma intrusão em potencial. É inicializado pelo
+        detector de incidente.
+    \end{itemize}
+
+    \subsection{Dados}
+    Dados extraídos têm grande influência no desempenho do sistema. Nessa área, podemos ter dados extraídos do cabeçalho
+    de pacotes ou do corpo de pacotes. E as características derivadas podem ser tanto de uma única conexão, como
+    geradas a partir de um conjunto de conexõs. \\
+    Dados extraídos de cabeçalho são rápidos de serem obtidos e contém informações de origem, destino, portas, e flags
+    TCP. Só que se é um ataque destinado a uma aplicação específica, devemos analisar o conteúdo dos pacotes.
+    Isso já é bem mais custoso, pois lida com compressão de dados. \\
+    Atributos derivados de uma única conexão podem apontar um protocolo inesperado, tamanhos incomuns de dados,
+    \emph{timestamp} não condizente. Portanto, características SCD permitem detecção de uso anômalo da rede
+    por \textit{backdoors}, túnel HTTP e afins.\\
+    Já os derivados de múltiplas conexões são extraídos a partir de conexões dentro de um intervalo de tempo.
+    Esses atributos são geralmente derivados usando média, desvio padrão, e porcentagem de fluxo de pacotes.
+    Podem ser usados para detectar volumes excessivos de tráfego relacionados a \textit{DoS} e \textit{probing}.
+
+
+    \subsection{Algoritmos}
+    A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
+    novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
+    do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
+    \begin{itemize}
+        \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características.
+        \item Modelos de Markov -- compara a probabilidade dos dados observados com um \emph{threshold} definido.
+        \item Redes neurais -- cria uma rede de \emph{perceptrons} com habilidade de se adaptar.
+        \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação.
+        \item Árvores de Decisão -- cria uma árvore onde cada folha representa uma classe e arestas correspondem a
+            diferentes valores de atributos.
+    \end{itemize}
+
+\section{Testes}
+    \subsection{Representabilidade}
+    O primeiro teste consistiu de avaliar a performance da detecção mudando a relação entre a base de treino e de testes.
+    Foi usada uma base de dados livre NSL-KDD, com 1.140.000 instâncias. Ela foi dividida em 5 particionamentos, variando
+    a porcentagem para treino e a porcentagem para teste. O algoritmo usado foi o SVM.
+    Analisando a tabela, podemos ver uma correlação entreo tamanho da base de treino com a porcentagem de instâncias
+    categorizadas corretamente. Com metade do tráfego sendo usado para treino, atingiu 99.64\% de acerto.
+    Isso pode parecer muito bom, mas em um mundo real, não há como usar 50\% de todas as conexões para treinar o sistema.
+    Além disso, o KDD já tem 16, o que o torna obsoleto.
+
+    \subsection{Imprevisibilidade}
+    Aí vem a teste a real capacidade dos algoritmos de machine learning se adaptarem a novos ataques. Para testar o
+    impacto da imprevisibilidade, foi usada uma base gerada por mestrando da PUC Eduardo Viegas. Através de simulações de
+    rede, ele gerou três grupos de dados, contendo conexões normais e anômalas:
+    \begin{enumerate}
+        \item Inicial - 500.000 instâncias de conexões usando protocolo HTTP e SMTP.
+        \item Análogo - 148.343 instâncias contendo ataques parecidos ou derivados dos anteriores.
+        \item Desconhecido - 276.548 instâncias com novos ataques e novos protocolos, como SNMP e SSH.
+    \end{enumerate}
+
+    O processo consistiu de treinar algoritmos de SVM e DT usando metade da base Inicial e avaliar o desempenho
+     ao se classificar cada um dos grupos restantes. As taxas de acerto evidenciam uma grande perda de confiabilidade
+     conforme o surgimento de novos ataques, sendo a classificação da base \textit{Desconhecido} praticamente tão
+     eficiente quanto uma adivinhação aleatória.
+
+    \subsection{Redução}
+    Tendo em vista o alto custo computacional para processar as 51 características iniciais, foi ponderada a viabilidade
+    de se utilizar uma seleção de atributos prévia para agilizar o processamento na tomada de decisões. Utilizando o
+    PCA, a quantidade de características foi reduzida para 39.
+    o resultado dos algoritmos nesse cenário teve nenhum ganho significativo. Enquanto os atributos selecionados podem
+    ser mais descritivos para os ataques vistos na base \textit{Inicial}, talvez não sejam interessantes para
+    identificar os ataques correntes.
+
+
+\section{Conclusão}
+    Em suma, os algoritmos de aprendizado tentam automatizar o processo de reconhecer ameaças dentro da rede
+    através da detecção de conexões anômalas, dando luz aos Sistemas de Detecção de Intrusão em Rede baseados em Anomalia.
+    Neste trabalho, foram analisados os diferentes tipos de dados utilizados para a detecção de intrusões em rede e a
+    performance de algoritmos sugeridos em trabalhos relacionados. Também foram estudados os impactos de uma base de
+    treino suficientemente representativa da rede para predição de ataques desconhecidos pelo sistema.
+    \par O primeiro teste, usando apenas SVM, mostrou a necessidade de se gerar uma base de treino grande o suficiente, a
+    fim de se evitar amostras pouco representativas. Os resultados do segundo teste sugerem que, possivelmente, os A-NIDS
+    não tenham tanta escalabilidade com o surgimento de ameaças completamente desconhecidas e que, portanto, seriam
+    necessárias bases específicas para aplicações particulares ao invés de sistemas genéricos. O último teste tinha a
+    intenção de melhorar os resultados anteriores através da seleção de atributos, mas o seu ganho de performance não foi
+    significativo.
+    \par O campo ainda está aberto para novos estudos e análises quanto a viabilidade do uso de machine learning em tempo
+    real para a detecção de novas ameaças. Existem outros pontos não abordados nesse trabalho que também têm espaço para
+    serem otimizados, tais quais a atual falta de métricas unificadas; o processamento do alto, rápido e contínuo fluxo de
+    dados na rede; análise de dados cifrados e a taxa aceitável de Falso Positivo. Por fim, pode-se considerar que
+     o maior desafio nos testes de detecção de intrusão em rede reside em adquirir uma base de treino e de testes que
+ represente precisamente o atual comportamento da rede.
+
+\end{document}
