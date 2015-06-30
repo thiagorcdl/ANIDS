@@ -141,4 +141,42 @@
      o maior desafio nos testes de detecção de intrusão em rede reside em adquirir uma base de treino e de testes que
  represente precisamente o atual comportamento da rede.
 
+
+\newpage
+
+\section{Observações}
+    \subsection{Existe algum software comercial?}
+    Snort é open source, mas funciona baseado em assinatura, com plugin baseado em anomalia.\\
+    AlienVault possui um IDS baseado em assinatura e anomalia, com análise de protocolos.
+
+    \subsection{Por que o baixo desempenho do SVM? Por que usá-lo, então?}
+    Segundo o teorema chamado \emph{no free lunch}, não existe garantia prévia de que um algoritmos de aprendizado de
+    máquina será melhor que outro. Além disso o SVM depende de uma série de configurações, principalmente a função
+    núcleo. Nesse caso eu usei uma função quadrática, pode ser que uma linear conseguisse resolver até mais rápido.
+
+    \subsection{Cite outros tipos de segurança de rede}
+    O primeiro passo é Autenticação, que está incluso nas ferramentas básicas que eu citei no início. Pode-se estender
+    para autenticação two-factor ou three-factor, requerindo uma confirmação por celular ou por digital.\\
+    Um firewall é comumente usado para controlar os serviços e portas abertas para os usuários do sistema. \\
+    Existem os comuns anti-virus para analisar o binário de arquivos recebidos. \\
+    Pode-se usar alguma forma de criptografia para assegurar a confidencialidade da informação. \\
+    Honeypots para "distrair" os invasores e analisar seu comportamento.
+
+    \subsection{Quais tipos de ataque podem ser detectados?}
+    IP Spoofing, DNS Spoofing, Probing, Sechole, HTTP Tunnel, Imap, etc.
+
+    \subsection{Como funciona o SVM?}
+    O SVM é um algoritmo iterativo que tenta encontrar um hiperplano que melhor separe as classes observadas.
+    Dado um gráfico em R2 com características x1 e x2 e uma distribuição de circulo e triangulo,
+    poderíamos usar apenas um eixo para classificar as instâncias, fazendo uma linha vertical no meio. Entretanto,
+    essa não é necessariamente a melhor solução, pois dá pouca margem para erro. O SVM, tenta, então,
+    maximizar as distâncias das ocorrências para o hiperplano, o que é uma tarefa não-linear.\\
+    Teremos, então um hiperplano dado por:
+    $$ g(\vec{x}) = \vec{w} \cdot \vec{x}_i + w_0 ,  \forall  1 \leq i \leq n  $$
+    Inserindo novos dados na função, teremos resultados $\geq 1$ para a primeira classe e $\leq -1$ para a segunda.
+
+    \subsection{Como funciona Cadeia de Markov?}
+    É feita uma estimativa da probabilidade de uma instância pertencer a uma ou outra classe baseado em observações
+    da base de treino. Leva em consideração a quantidade de vezes que cada atributo se sobressai para cada classe.
+
 \end{document}
