@@ -68,7 +68,7 @@
     \subsection{Dados}
     Dados extraídos têm grande influência no desempenho do sistema. Nessa área, podemos ter dados extraídos do cabeçalho
     de pacotes ou do corpo de pacotes. E as características derivadas podem ser tanto de uma única conexão, como
-    geradas a partir de um conjunto de conexõs. \\
+    geradas a partir de um conjunto de conexões. \\
     Dados extraídos de cabeçalho são rápidos de serem obtidos e contém informações de origem, destino, portas, e flags
     TCP. Só que se é um ataque destinado a uma aplicação específica, devemos analisar o conteúdo dos pacotes.
     Isso já é bem mais custoso, pois lida com compressão de dados. \\
@@ -98,14 +98,14 @@
     O primeiro teste consistiu de avaliar a performance da detecção mudando a relação entre a base de treino e de testes.
     Foi usada uma base de dados livre NSL-KDD, com 1.140.000 instâncias. Ela foi dividida em 5 particionamentos, variando
     a porcentagem para treino e a porcentagem para teste. O algoritmo usado foi o SVM.
-    Analisando a tabela, podemos ver uma correlação entreo tamanho da base de treino com a porcentagem de instâncias
+    Analisando a tabela, podemos ver uma correlação entre o tamanho da base de treino com a porcentagem de instâncias
     categorizadas corretamente. Com metade do tráfego sendo usado para treino, atingiu 99.64\% de acerto.
     Isso pode parecer muito bom, mas em um mundo real, não há como usar 50\% de todas as conexões para treinar o sistema.
-    Além disso, o KDD já tem 16, o que o torna obsoleto.
+    Além disso, o KDD já tem 16 anos, e de lá pra cá, a realidade da comunicação mudou.
 
     \subsection{Imprevisibilidade}
     Aí vem a teste a real capacidade dos algoritmos de machine learning se adaptarem a novos ataques. Para testar o
-    impacto da imprevisibilidade, foi usada uma base gerada por mestrando da PUC Eduardo Viegas. Através de simulações de
+    impacto da imprevisibilidade, foi usada uma base gerada por mestrando da PUC, Eduardo Viegas. Através de simulações de
     rede, ele gerou três grupos de dados, contendo conexões normais e anômalas:
     \begin{enumerate}
         \item Inicial - 500.000 instâncias de conexões usando protocolo HTTP e SMTP.
@@ -124,7 +124,7 @@
     PCA, a quantidade de características foi reduzida para 39.
     o resultado dos algoritmos nesse cenário teve nenhum ganho significativo. Enquanto os atributos selecionados podem
     ser mais descritivos para os ataques vistos na base \textit{Inicial}, talvez não sejam interessantes para
-    identificar os ataques correntes.
+    identificar os ataques que residem além daquele horizonte.
 
 
 \section{Conclusão}
