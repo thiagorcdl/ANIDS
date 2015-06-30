@@ -11,7 +11,7 @@ Analisando os dados de artigos publicados entre os anos 2000 e 2007 e as diferen
     \item Os algoritmos mais estudados para detecção de instrusão foram SVM e KNN. Quanto a classificadores híbridos,
     o método \textit{integrado} é o mais popular.
 
-    \item A utilização de seleção de atributos têm crescido com o tempo. Enquanto em 2003 apenas um quarto dos estudos analisados
+    \item A utilização de seleção de atributos tem crescido com o tempo. Enquanto em 2003 apenas um quarto dos estudos analisados
 por \cite{tsai09} utilizava essa técnica, em 2007 foi o caso de 9 dentre 11. Ou seja, apenas dois
 (\cite{peddabachigari07}, \cite{li07}) não utilizaram.
 
@@ -22,7 +22,7 @@ por \cite{tsai09} utilizava essa técnica, em 2007 foi o caso de 9 dentre 11. Ou
 \par Quanto aos dados, as técnicas pioneiras costumavam criar modelos considerando todo o corpo do pacote. Entretanto,
 eles separavam as instâncias com base no tamanho do pacote e portas de destino, diminuindo o contexto de cada modelo.
 Técnicas posteriores levam em consideração partes específicas do conteúdo do pacote. Aparentemente, anomalias mais
-sutis podem ser detectadas a uma taxa manor de Falso Positivo quando usando um contexto mais específico.
+sutis podem ser detectadas a uma taxa menor de Falso Positivo quando usando um contexto mais específico.
 \par Dois artigos recentes trouxeram implementações promissoras a respeito de sistemas de detecção de
 anomalia. Um deles (\cite{lin12}) apresenta um algoritmo inteligente e o outro (\cite{papadonikolakis12}) mostra o
 ganho de performance ao se programar o sistema diretamente em uma placa FPGA.
@@ -39,7 +39,7 @@ classificação. O algoritmo conseguiu atingir uma precisão de 99,6\%, o que re
 
 \subsection{Support Vector Machine}
 SVM trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
-Ele se baseia em minimizar o risco estrutural. Os dados de enrada são mapeados por uma \textit{função núcleo}, a qual
+Ele se baseia em minimizar o risco estrutural. Os dados de entrada são mapeados por uma \textit{função núcleo}, a qual
 é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última
 é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade. SA é aplicado para escolher
 os melhores valores para os parâmetros usados na função \textit{radial basis}.
