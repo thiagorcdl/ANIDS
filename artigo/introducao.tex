@@ -8,7 +8,7 @@ por bancos para efetuar transações monetárias; e por governos para trocas de 
 Assim como é possível se conectar de uma máquina pessoal a um servidor \textit{web}, é possível fazer o contrário.
 Qualquer máquina conectada a uma rede está teoricamente sujeita ao acesso de fora.
 Roteadores e sistemas operacionais atuais estão equipados com ferramentas básicas para previnir acesso não autorizado
-ao computador. Ainda assim, há pessoas dedicadas a burlar tais proteções. Alguns desses invasores conseguem copiar
+ao computador \cite{hongjuan10}. Ainda assim, há pessoas dedicadas a burlar tais proteções. Alguns desses invasores conseguem copiar
 arquivos, instalar \textit{malware} e até ganhar controle sobre o sistema sem serem notados pelo dono.
 \par A fim de cobrir esse ponto cego, foram criados sistemas de detecção de intrusão, ou IDS
 (\textit{intrusion detection systems}). Seu objetivo é reconhecer comportamentos incomuns dentro de uma rede.
@@ -23,3 +23,12 @@ acadêmico acerca do assunto:
     \item \textit{Anomaly-based} (baseado em anomalia) -- Ainda uma área de estudo, possui alta taxa de
     Falso Positivo, mas boa adaptabilidade e será o foco deste trabalho.
 \end{enumerate}
+\par Nesta monografia, farei um estudo sobre os Sistemas de Detecção de Intrusão em Rede baseados em Anomalia, aos quais
+ vou me referir pela sigla em inglês A-NIDS \footnote{Anomaly-bases Network Intrusion Detection Systems} por questão de
+ simplicidade. Abordarei ao longo do trabalho o conceito geral e esquematização de sistemas de detecção; os algoritmos
+ de aprendizado de máquina que são comumente utilizados na área; os tipos de dados e características que podem ser
+ adquiridos da rede; e por fim, efetuarei três testes para ver na prática o funcionamento dos algoritmos \emph{Support Vector
+ Machine} (SVM) e \emph{Decision Tree} (DT). O primeiro teste consistirá de uma análise sobre os efeitos da variação do
+ tamanho de uma base de dados ao se treinar o sistema. O segundo visa colocar à prova a teoria de que o uso de aprendizado
+ de máquina possa ter boa adaptabilidade a novos tipos de ataque. Já o último teste, será uma avaliação dos efeitos da
+ redução da dimensionalidade da base de dados.
