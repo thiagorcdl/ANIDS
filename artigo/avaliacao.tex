@@ -2,30 +2,33 @@
 \label{ch:analise}
 
 NIDS baseado em anomalia tem se mostrado uma área de estudo promissora, mas ainda necessita de bastante pesquisa.
-Analisando os dados de artigos publicados entre os anos 2000 e 2007 e as diferentes técnicas utilizadas \cite{tsai09},
-é possível extrair algumas inferências.
+Analisando os dados de 55 artigos apresentados em \cite{tsai09}, publicados entre os anos 2000 e 2007,
+é possível extrair algumas inferências sobre as diferentes técnicas utilizadas.
 \begin{itemize}
-    \item  A maioria dos artigos se baseia no uso de classificadores unitários, apesar de que o uso de
-    classificadores híbridos tem aumentado durante os últimos anos. Classificadores compostos são usados por poucos.
+    \item  26 se baseiam no uso de classificadores unitários, apesar de que o uso de
+    classificadores híbridos tem aumentado durante os últimos anos.
+    Classificadores compostos são usados por poucos, totalizando apenas 6.
 
-    \item Os algoritmos mais estudados para detecção de instrusão foram SVM e KNN. Quanto a classificadores híbridos,
-    o método \textit{integrado} é o mais popular.
+    \item Os algoritmos unitários mais estudados para detecção de instrusão foram SVM (7) e K-NN (6).
+
+    \item Quanto a classificadores híbridos, o método \textit{integrado} é o mais popular, consistindo de 10 dos 23.
 
     \item A utilização de seleção de atributos tem crescido com o tempo. Enquanto em 2003 apenas um quarto dos estudos analisados
-por \cite{tsai09} utilizava essa técnica, em 2007 foi o caso de 9 dentre 11. Ou seja, apenas dois
-(\cite{peddabachigari07}, \cite{li07}) não utilizaram.
+por \cite{tsai09} utilizava tal técnica, em 2007 foi o caso de 9 dentre 11. Ou seja, apenas dois (\cite{peddabachigari07}, \cite{li07}) não utilizaram.
 
     \item Como há poucas bases de dados públicas para detecção de instrusão, a maioria dos estudos se baseia nas
-    bases KDD Cup 99 e DARPA 1998.
+    bases KDD Cup 99 (30) e DARPA 1998 (18).
 \end{itemize}
 
-\par Quanto aos dados, as técnicas pioneiras costumavam criar modelos considerando todo o corpo do pacote. Entretanto,
+\par Quanto aos dados, as técnicas pioneiras costumavam criar modelos considerando todo o corpo do pacote . Entretanto,
 eles separavam as instâncias com base no tamanho do pacote e portas de destino, diminuindo o contexto de cada modelo.
 Técnicas posteriores levam em consideração partes específicas do conteúdo do pacote. Aparentemente, anomalias mais
 sutis podem ser detectadas a uma taxa menor de Falso Positivo quando usando um contexto mais específico.
 \par Dois artigos recentes trouxeram implementações promissoras a respeito de sistemas de detecção de
 anomalia. Um deles (\cite{lin12}) apresenta um algoritmo inteligente e o outro (\cite{papadonikolakis12}) mostra o
-ganho de performance ao se programar o sistema diretamente em uma placa FPGA.
+ganho de desempenho ao se programar o sistema diretamente em uma placa FPGA. Para os fins desta monografia, não irei
+implementar o algoritmo em FPGA e, apesar de o foco não ser classificadores em cascata, os estudos relacionados merecem
+notoriedade por consituirem o estado da arte no que se propõem a fazer.
 
 \section{Processando grandes quantidades de dados}
 A simulação apresentada em \cite{lin12} usou a base do KDD Cup 99. O algoritmo funciona pré-processando os dados de treino e teste e gerando uma solução

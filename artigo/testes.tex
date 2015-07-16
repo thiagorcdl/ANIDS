@@ -13,9 +13,9 @@ implementados, pré-processamento de dados, seleção de atributos e visualizaç
 interface, permitindo que novos algoritmos em Java sejam produzidos e facilmente executados de forma gráfica e com
 resultados interativos \cite{bouckaert10}.
 
-\section{Avaliação de Performance}
+\section{Avaliação de desempenho}
 Gráficos ROC (\textit{Receiver Operating Characterístics}) são comumente usados como um método  para visualizar
-a performance de classificadores e analisar as taxas de acertos e alarmes falsos \cite{fawcett04}. Um gráfico ROC
+o desempenho de classificadores e analisar as taxas de acertos e alarmes falsos \cite{fawcett04}. Um gráfico ROC
 baseia-se em apenas duas classes: positivo ou negativo. Em termos de detecção de intrusão, uma conexão pode ser
 considerada inofensiva (positivo) ou prejudicial (negativa). Para avaliar a precisão de um classificador,
 duas outras categorias podem ser usadas: verdadeiro e falso. Quando cruzadas, obtém-se quatro possíveis resultados,
@@ -91,7 +91,7 @@ positivo mais facilmente.
 \par Um classificador perfeito resultaria no ponto (0,1), onde C se encontra. Isso significaria possuir $FP_{rate}$ de
 0\% e $TP_{rate}$ de 100\%, ou seja, todas as conexões intrusivas serem detectadas e nenhuma conexão normal ser
 bloqueada pelo sistema. Assim sendo, quanto maior o $TP_{rate}$ e menor o $FP_{rate}$, mais preciso é o algoritmo.
- Se um classificador está localizado abaixo da linha diagonal ($y = x$), isto significa que sua performance é pior do
+ Se um classificador está localizado abaixo da linha diagonal ($y = x$), isto significa que seu desempenho é pior do
  que a escolha aleatória de classes. O triângulo inferior direito é geralmente encontrado vazio pois em casos de
  classificação binária com alta taxa de erro, é possível simplesmente inverter os resultados. Portanto, E (0.8,0.2)
  seria tão preciso quanto D(0.2,0.8)
@@ -99,7 +99,7 @@ bloqueada pelo sistema. Assim sendo, quanto maior o $TP_{rate}$ e menor o $FP_{r
 
 \section{Impacto de modelos representativos}
 O primeiro teste realizado levou em consideração apenas o SVM padrão fornecido pelo libSVM para o Weka. A finalidade
-era verificar o impacto da representabilidade da base de treino \cite{yaman11}, analisando a performance do algoritmo
+era verificar o impacto da representabilidade da base de treino \cite{yaman11}, analisando o desempenho do algoritmo
 quando treinado com bases de diferentes tamanhos. Para esse estudo, o KDD Cup 99 foi divido em 5 particionamentos,
 cada um com tamanhos distintos de bases de treino e de testes, usando a opção de \textit{cross-validation} do Weka.
 O comando executado incluiu um pré-processamento de heurística de encolhimento, peso $1$, \emph{seed} de $3$, erro de
