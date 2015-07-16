@@ -32,16 +32,34 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
  novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
  do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
  \begin{itemize}
-    \item Rede Bayesiana -- cria uma rede de relações de probabilidade entre características.
-    \item Modelos de Markov -- compara a probabilidade dos dados observados com um \emph{threshold} definido.
-    \item Redes neurais -- cria uma rede de \emph{perceptrons} com habilidade de se adaptar.
-    \item Lógica Fuzzy -- enxerga características como variáveis \emph{fuzzy} e classifica com base em valores contínuos.
-    \item Algoritmos Genéticos -- deriva regras de classificação e seleciona as características mais discriminantes.
-    \item Support Vector Machines -- encontra um hiperplano que eficientemente separa ambas as opções de classificação.
-    \item Árvores de Decisão -- cria uma árvore onde cada folha representa uma classe e arestas correspondem a
-        diferentes valores de atributos.
-    \item Clustering -- algoritmo não-supervisionado que agrupa dados com base em suas similaridades.
+    \item Support Vector Machines
+    \item Árvores de Decisão
+    \item Redes neurais
+    \item Rede Bayesiana
+    \item Clustering
 \end{itemize}
+
+    \subsection{Support Vector Machine}
+    SVM trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
+    Ele se baseia em minimizar o risco estrutural. Os dados de entrada são mapeados por uma \textit{função núcleo}, a qual
+    é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última
+    é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade. SA é aplicado para escolher
+    os melhores valores para os parâmetros usados na função \textit{radial basis}.
+
+    \subsection{Árvore de Decisão}
+    DT (\emph{Decision Tree}) é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista. Ele
+    cria uma árvore de decisão contando com um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
+    nós internos, que correspondem às características; arestas, que são os possíveis valores de cada característica; e
+    folhas, que contêm a classe a ser atribuída ao caso de teste.
+
+    \subsection{Redes Neurais}
+        Cria uma rede de \emph{perceptrons} com habilidade de se adaptar.
+
+    \subsection{Rede Bayesiana}
+        Cria uma rede de relações de probabilidade entre características.
+
+    \subsection{Clustering}
+        Algoritmo não-supervisionado que agrupa dados com base em suas similaridades.
 
 \section{Combinação de Classificadores}
 Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante estudada no meio acadêmico é a
