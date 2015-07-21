@@ -1,4 +1,4 @@
-\chapter{Sistemas de Detecção em Rede baseadoes em Anomalia}
+\chapter{Sistemas baseadoes em Anomalia}
 \label{ch:anids}
  A técnica de detecção de anomalia analisa o atual comportamento da rede para checar se corresponde ou não a um
  comportamento normal. O maior benefício desse método é a habilidade de identificar novos ataques com sucesso.
@@ -34,20 +34,25 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
 \emph{Support Vector Machines}; Árvores de Decisão; Redes Neurais; Rede Bayesiana; e \emph{Clustering}.
 
     \subsection{Support Vector Machine}
-    SVM (\emph{Support Vector Machine}) trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminação.
-    Ele se baseia em minimizar o risco estrutural. Os dados de entrada são mapeados por uma \textit{função núcleo}, a qual
-    é geralmente escolhida entre \textit{linear}, \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última
-    é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade. SA é aplicado para escolher
-    os melhores valores para os parâmetros usados na função \textit{radial basis}.
+    SVM (\emph{Support Vector Machine}) trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminabilidade.
+    Ele se baseia em minimizar o risco estrutural, ou seja, evitar que o modelo gerado fique muito específico para a base de treino \cite{lin12}.
+    O SVM utiliza a base de treino para gerar um hiperplano que serve como uma fronteira para separar todas as instâncias em dois grupos; um para cada classe
+    Os dados de teste são mapeados por uma \textit{função núcleo}, a qual é geralmente escolhida entre \textit{linear},
+    \textit{polinomial}, \textit{sigmoide} ou \textit{radial basis}. A última é preferida no uso em SVM por usa capacidade de lidar com dados de alta dimensionalidade \cite{lin12}.
 
     \subsection{Árvore de Decisão}
-    DT (\emph{Decision Tree}) é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista. Ele
+    DT (\emph{Decision Tree}) é um método de classificação baseado em um algoritmo guloso, utilizando uma estratégia de divisão e conquista \cite{lin12}. Ele
     cria uma árvore de decisão contando com um nó raiz, que é usado para selecionar o atributo com a informação de maior valor;
     nós internos, que correspondem às características; arestas, que são os possíveis valores de cada característica; e
-    folhas, que contêm a classe a ser atribuída ao caso de teste.
+    folhas, que contêm a classe a ser atribuída ao caso de teste \cite{benferhat05}.
 
     \subsection{Redes Neurais}
-        Cria uma rede de \emph{perceptrons} com habilidade de se adaptar.
+    Redes neurais possuem grande adaptabilidade e são formadas por uma cadeira de perceptrons, também conhecido como MLP
+    (Multilayer Perceptron). O algoritmo supervisionado passa duas vezes pela rede. Na ida, é aplicado um padrão de
+    atividade nos perceptrons de entrada, que repassam para as camadas seguintes utilizando pesos pré-definidos. Na volta,
+     o erro calculado é propagado para trás, fazendo com que os pesos dos perceptrons sejam ajustados.
+     Uma técnica é inicializar os pesos com valores aleatórios entre $-0.5$ e $0.5$ para se evitar taxas de aprendizado
+     pequenas (que disperdiçam recursos) e taxas muit altas (que demoram para treinar) \cite{barapatre08}.
 
     \subsection{Rede Bayesiana}
         Cria uma rede de relações de probabilidade entre características.
