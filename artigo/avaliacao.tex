@@ -58,7 +58,7 @@ vez diretamente em um FPGA, fazendo uso de seu potencial de processamento parale
     exceder as limitações de hardware. Essa arquitetura propõe uma reconfiguração do FPGA depois do estágio de treino e
     expande o espaço de design possível. Isso permite a utilização de mais blocos durante as classificação.
 \end{enumerate}
-\par A base utilizada para testes foi a \textit{MINIST Dataset}. Comparando com testes prévios em GPU, o design
-\textit{Heterogeneous Baseline Classifier} processou os dados 7 vezes mais rápido. Os melhores resultados foram
+\par A base utilizada para testes foi a \textit{MINIST Dataset}. Os autores haviam previamente executado testes similares em \emph{GPU} (unidade de processamento gráfico).
+Comparando com testes prévios, o design \textit{Heterogeneous Baseline Classifier} processou os dados 7 vezes mais rápido. Os melhores resultados foram
 obtidos usando \textit{Reconfigurable Cascade Chain}, com um ganho de 20 vezes, isto é, levando apenas 5\% do tempo
 que a GPU consumiu.
