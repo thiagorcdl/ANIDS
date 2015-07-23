@@ -55,10 +55,18 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
      pequenas (que disperdiçam recursos) e taxas muit altas (que demoram para treinar) \cite{barapatre08}.
 
     \subsection{Rede Bayesiana}
-        Cria uma rede de relações de probabilidade entre características.
+    Naive Bayes é um algoritmo utilizado para criar uma rede de relações de probabilidade entre características. Essa
+    rede é formada por um dois componentes: um grafo direcionado acíclico, onde vértices correspondem a eventos e
+    arestas as relações entre eles; e um componente numérico, que quantifica a probabilidade de transição entre os nós.
+    O grafo do Naive Bayes possui apenas uma raiz que representa o nó não-observado e se considera que os filhos
+    são características independentes entre si \cite{benferhat05}.
 
     \subsection{Clustering}
-        Algoritmo não-supervisionado que agrupa dados com base em suas similaridades.
+     Clustering se trata de um algoritmo não-supervisionado que agrupa dados com base em suas similaridades, criando
+      partições disjuntas \cite{ni07}. O algoritmo \emph{K-means}, por exemplo, cria $k$ grupos. Ele inicializa os centros
+      dos grupos escolhendo $k$ dados aleatoriamente e então percorre o resto dos dados e atribui ao mesmo grupo do
+      centro que está a uma menor Distância Euclidiana. Ele recalcula os centros e repete passa novamente pelos dados,
+      repetindo até que os centros não mudem de posição \cite{zhang09}.
 
 \section{Combinação de Classificadores}
 Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante estudada no meio acadêmico é a
