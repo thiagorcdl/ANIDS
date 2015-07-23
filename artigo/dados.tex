@@ -6,7 +6,7 @@ Os passos mais relevantes para o modelamento de dados de um A-NIDS são os segui
     Categorização de tráfego de rede pode ser uma tarefa difícil e longa, que geralmente envolve um especialista.
     \item Construção de características -- cria características com maior discriminabilidade. Tais características
     podem ser construídas por um humano ou por algoritmos de aprendizado de máquina.
-    \item Redução -- também chamado de "seleção de caterísticas", diminui a dimensionalidade da base de dados
+    \item Redução -- também chamado de "seleção de características", diminui a dimensionalidade da base de dados
     descartando características irrelevantes ou redundantes \cite{song13}. Usado para atenuar a "Maldição da
     Dimensionalidade" \footnote{\textit{Curse of Dimensionality}: Ao se usar muitas características,
     supostamente se obtém baixa precisão.}.
@@ -42,7 +42,7 @@ pacote e, portanto, as técnicas baseadas em cabeçalho não podem ser usadas. I
 principalmente porque diversos ataques da atualidade não são direcionados à rede em si, mas a aplicações conectadas a
 ela \cite{yaman11}.
 \par NIDS devem utilizar características baseadas em conteúdo, extraídas do corpo dos pacotes, para detectar tais tipos 
-de ataques, uma vez que cabeçalhos podem aparentar completamente normais. Análise de conteúdo é computacionalmente 
+de ataques, uma vez que alguns cabeçalhos podem aparentar completamente normais. Análise de conteúdo é computacionalmente
 mais cara do que análise de cabeçalho porque requer uma inspeção mais profunda do pacote. Ela lida com uma variedade de
 tipo de conteúdo (pdf, jpg, HTML), compressão, e métodos que encobrem dados. Entretanto, o benefício da análise do
 corpo é ter acesso a todos os bytes transferidos entre os dispositivos na rede, permitindo a construção de um rico
@@ -62,7 +62,7 @@ derivadas de múltiplas conexões (MCD). Esses atributos são geralmente derivad
 porcentagem de fluxos, cobrindo múltiplas sessões. NIDS baseados em anomalia que utilizam essas caracterśiticas são
 capazes de discernir entre atividade normal da rede e tráfego incomum como \textit{DoS} e \textit{scanning}.
 \par Características MCD são geralmente extraídas a partir de conexões dentro de um intervalo de tempo. A maioria das
- Características de MCD são baseadas em volume, como o a quantidade de conexões a um endereço de IP e porta
+ Características de MCD são baseadas em volume, como a quantidade de conexões a um endereço de IP e porta
  em um espaço de tempo. Portanto, atributos derivados de múltiplas conexões podem ser facilmente usados para detectar
  volumes excessivos de tráfego relacionados a \textit{DoS} e \textit{probing}. Como pacotes anômalos individuais não
  suprem o valor baseado em volume, eles podem ser ignorados.
@@ -77,7 +77,7 @@ temporização de pacotes dentro de uma porta monitorada não se encaixa com um 
 disparado, uma vez que pode se tratar de um protocolo de tunelamento.
 
 \subsection{KDD Cup 99}
-O KDD Cup 99 se trata de uma base dados para uso livre. Ela possui 32 características quantitativas e
+O KDD Cup 99 se trata de uma base de dados para uso livre. Ela possui 32 características quantitativas e
 9 qualitativas, junto a tráfego normal e ataques de \textit{probing}, negação de serviço, \textit{user to root} e
 \textit{remote to local} \cite{zhang09}.  Tais características foram construídas por um especialista e involvem informações de mais
 alto nível, como o número de tentativas de login sem sucesso, se acesso root ao terminal foi conseguido,
@@ -98,12 +98,12 @@ de características. As informações seguintes acerca dos dados e característi
 em \cite{davis11}.
 
 \subsection{Derivação}
-Dfierentes tipos de características que podem ser usados em NIDS baseados em anomalia foram cobertos em \cite{davis11}.
+Diferentes tipos de características que podem ser usados em NIDS baseados em anomalia foram cobertos em \cite{davis11}.
 Cada tipo de característica é derivada de vários métodos de pré-processamento, incluindo organizar pacotes em fluxos,
 analisar conteúdo de aplicações em busca de campos de interesse ou percorrer cabeçalhos de cada pacote. A derivação do
 potencial conjunto de características é um passo essencial para o NIDS baseado em anomalia. Analogamente,
 pré-processamentos subsequentes podem ajudar ainda mais a aumentar a eficiência do NIDS.
-\par Métodos de pré-processamento de mineração de dados podem ser usados, incluindo tranformação, redução e
+\par Métodos de pré-processamento de mineração de dados podem ser usados, incluindo transformação, redução e
 discretização de dados, como os apresentados em \cite{ribeiro08}. Uma técnica de redução geralmente utilizada é a
 \textit{Principal Component Analysis}. PCA tem se mostrado útil para redução da dimensionalidade dos dados,
 consequentemente reduzindo o custo computacional do sistema de detecção
