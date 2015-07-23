@@ -13,25 +13,25 @@
 Um modelo de probabilidade de um determinado comportamento é criado a partir da atividade capturada do tráfego de rede,
  tal como taxa de tráfego, número de pacotes e quantidade de endereços de IP distintos.
  \par Ele não requer conhecimento prévio pois está capacitado a aprender o comportamento normal a partir de observações
- sem ataques. Outro benefício das técnicas estatísticas é a possibilidade de identificar, com precisão, atividades
- maliciosas que ocorrem ao longo de períodos de tempo mais extensos. Por outro lado, nem todos os possíveis
+ sem ataques \cite{lunt89}. Outro benefício das técnicas estatísticas é a possibilidade de identificar, com precisão, atividades
+ maliciosas que ocorrem ao longo de períodos de tempo mais extensos \cite{catania12}. Por outro lado, nem todos os possíveis
  comportamentos conseguem ser modelados e o equilíbrio entre taxas de Falso Positivo e Falso Negativo dependem
  fortemente na configuração correta dos parâmetros.
 
  \section{Técnicas Baseadas em Conhecimento}
  Também chamados de \emph{expert systems}, sistemas baseados em conhecimento são implementados criando-se um conjunto de
- regras de classificação para categorizar os dados. O modelo é geralmente criado por um humano experiente no campo
+ regras de classificação para categorizar os dados \cite{lunt89}. O modelo é geralmente criado por um humano experiente no campo
  da aplicação. Esse tipo de sistema não aponta novas atividades inofensivas como sendo maliciosas, garantindo, assim,
- um número reduzido de Falso Positivo. Por essa razão, o conjunto de regras precisa ser específico o suficiente e,
+ um número reduzido de Falso Positivo \cite{catania12}. Por essa razão, o conjunto de regras precisa ser específico o suficiente e,
  apesar de ser possível atingir um certo nível de automação usando uma máquina de estados finitos, requer
  grande conhecimento sobre o comportamento da rede e tempo significativo para ser desenvolvido.
 
  \section{Técnicas de Machine Learning}
  Métodos de aprendizado de máquina exigem um conjunto de dados categorizados para treinar o modelo do comportamento
- esperado. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
+ esperado \cite{catania12}. A característica principal dessa técnica é a habilidade de adaptar suas regras de classificação à medida que
  novos dados são recebidos. Isso garante pouca necessidade por intervenção humana, uma vez funcionando. O lado ruim
  do aprendizado de máquina é o alto custo computacional. Os algoritmos mais populares usados em A-NIDS são:
-\emph{Support Vector Machines}; Árvores de Decisão; Redes Neurais; Rede Bayesiana; e \emph{Clustering}.
+\emph{Support Vector Machines}; Árvores de Decisão; Redes Neurais; Rede Bayesiana; e \emph{Clustering} \cite{tsai09}.
 
     \subsection{Support Vector Machine}
     SVM (\emph{Support Vector Machine}) trabalha mapeando a base de treino em um espaço vetorial de maior dimensionalidade para aumentar a discriminabilidade.
@@ -63,10 +63,13 @@ Um modelo de probabilidade de um determinado comportamento é criado a partir da
 
     \subsection{Clustering}
      Clustering se trata de um algoritmo não-supervisionado que agrupa dados com base em suas similaridades, criando
-      partições disjuntas \cite{ni07}. O algoritmo \emph{K-means}, por exemplo, cria $k$ grupos. Ele inicializa os centros
-      dos grupos escolhendo $k$ dados aleatoriamente e então percorre o resto dos dados e atribui ao mesmo grupo do
-      centro que está a uma menor Distância Euclidiana. Ele recalcula os centros e repete passa novamente pelos dados,
-      repetindo até que os centros não mudem de posição \cite{zhang09}.
+      partições disjuntas \cite{ni07}. O algoritmo \emph{K-means}, por exemplo, cria $k$ grupos, inicializando-os com centros
+      aleatórios. Ele, então, percorre o resto dos dados e atribui cada um ao mesmo grupo do
+      centro que está a uma menor Distância Euclidiana. O \emph{K-means} recalcula os centros e passa novamente pelos dados,
+      repetindo os passos até que os centros não mudem de posição \cite{zhang09}. A fórmula da Distância Euclidiana entre
+      os vetores de característica de uma instância ($X$) e de um centro ($C$) é dada por:
+      $$ d(X,C) = \sqrt{\sum_{i=1}^{m} \left ( X_i - C_i\right )^2} $$
+      onde $m$ é o número de características.
 
 \section{Combinação de Classificadores}
 Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante estudada no meio acadêmico é a
@@ -76,8 +79,8 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
 
  \subsection{Classificadores Híbridos}
     Um classificador híbrido consiste de dois componentes. O primeiro pré-processa o dado de entrada e envia ao segundo
-    classificador, que chega ao resultado final. O primeiro componente de classificadores híbridos pode ser usado tanto
-    como uma técnica de clustering para achar as classes que o segundo componente utilizará para categorizar os dados;
+    classificador, que chega ao resultado final \cite{tsai09}. O primeiro componente de classificadores híbridos pode ser usado tanto
+    como uma técnica de clustering para achar as classes que o segundo componente utilizará para categorizar os dados \cite{ni07};
     quanto como um otimizador de desempenho para o segundo modelo, o que corresponderia ao método \textit{integrado}
     \cite{aydin09}.
 
@@ -85,12 +88,11 @@ Como cada método possui seus pontos fortes e pontos fracos, uma ideia bastante 
  \subsection{Classificadores em Cascata}
     Pode ser considerado uma extensão dos classificadores híbridos, podendo consistir de inúmeros classificadores, onde
     o n-ésimo classificador utiliza como entrada os dados rejeitados pelo classificador anterior, ou seja, que não
-    atingiram um grau de certeza satisfatório. Alguns estudos sugerem otimização de \emph{thresholds} para aumentar precisão
-    \cite{oliveira05}.
+    atingiram um grau de certeza satisfatório \cite{tsai09}.
 
  \subsection{Composição de Classificadores}
     Uma composição de classificadores pode ser obtida usando-se técnicas fracas de aprendizado
-    (geralmente mais rápidas). Cada classificador é treinado usando um subconjunto distinto dos dados.
+    (geralmente mais rápidas) \cite{tsai09}. Cada classificador é treinado usando um subconjunto distinto dos dados.
     A base de testes é, então, processada por todos eles e, finalmente, categorizados pela maioria.
 
 

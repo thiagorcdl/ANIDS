@@ -34,13 +34,13 @@ posteriores.
 Entretanto, pacotes individuais não podem ser usados para identificar padrões incomuns durante um grande período.
 Existem ataques que contêm cabeçalhos normais quando analisados individualmente, enquanto sua repetição durante
 um certo tempo pode ser considerada anômala. Um exemplo seria o ataque de negação de serviço, popularmente conhecido
-como \textit{DoS}.
+como \textit{DoS} \cite{catania12}.
 
 \subsection{Corpo de pacote}
 Quando ataques são destinados a aplicações, os bytes maliciosos estão dentro do corpo do
 pacote e, portanto, as técnicas baseadas em cabeçalho não podem ser usadas. Isso representa um defeito considerável,
 principalmente porque diversos ataques da atualidade não são direcionados à rede em si, mas a aplicações conectadas a
-ela.
+ela \cite{yaman11}.
 \par NIDS devem utilizar características baseadas em conteúdo, extraídas do corpo dos pacotes, para detectar tais tipos 
 de ataques, uma vez que cabeçalhos podem aparentar completamente normais. Análise de conteúdo é computacionalmente 
 mais cara do que análise de cabeçalho porque requer uma inspeção mais profunda do pacote. Ela lida com uma variedade de
@@ -69,7 +69,7 @@ capazes de discernir entre atividade normal da rede e tráfego incomum como \tex
 
 \subsection{Conexão individual}
 Características derivadas de conexões individuais (SCD) são utilizadas para detectar comportamento anômalo dentro de
-uma úncia sessão. Elas podem apontar um protocolo inesperado, tamanhos incomuns de dados, \emph{timestamp} não condizente,
+uma úncia sessão \cite{song13}. Elas podem apontar um protocolo inesperado, tamanhos incomuns de dados, \emph{timestamp} não condizente,
 ou sequências incomuns de \textit{flags} de TCP. Portanto, características SCD permitem detecção de uso anômalo da rede
 por \textit{backdoors}, túnel HTTP e afins.
 \par As características SCD fornecem contexto que pode ser usado para encontrar anomalias não contextuais. Por exemplo, se a
@@ -79,7 +79,7 @@ disparado, uma vez que pode se tratar de um protocolo de tunelamento.
 \subsection{KDD Cup 99}
 O KDD Cup 99 se trata de uma base dados para uso livre. Ela possui 32 características quantitativas e
 9 qualitativas, junto a tráfego normal e ataques de \textit{probing}, negação de serviço, \textit{user to root} e
-\textit{remote to local}.  Tais características foram construídas por um especialista e involvem informações de mais
+\textit{remote to local} \cite{zhang09}.  Tais características foram construídas por um especialista e involvem informações de mais
 alto nível, como o número de tentativas de login sem sucesso, se acesso root ao terminal foi conseguido,
 e o número de operações de criação de arquivo.
 \par Considerando que o KDD Cup 99 já tem mais de 15 anos, é provável que essas características não sejam mais úteis
@@ -126,7 +126,7 @@ protocolos estruturados de aplicações, sem exigir muita supervisão.
 dados entre usuário e aplicação web. Requisições maliciosas provavelmente serão apontadas como anômalas quando
 comparadas com um ou mais modelos, pois geralmente se diferem de requisições normais de alguma forma.
 \par Embora a intenção é que NIDS sejam completamente automáticos, sua criação e adaptação requerem um especialista.
-Mesmo o N-grams necessita de auxílio em algumas áreas da rede. LibAnomaly também requer experiência significativa
+Mesmo o N-grams necessita de auxílio em algumas áreas da rede \cite{zhuowei03}. LibAnomaly também requer experiência significativa
 para selecionar quais campos dentro da rede devem ser modelados. Por outro lado, detecção usando cabeçalhos de
 pacotes requerem menos conhecimento. Técnicas de mineração de dados podem ser usadas para derivar características de
 cabeçalhos MCD para detectar algumas ameaças. O conjunto de características em potencial  poderá, então, ser processado no

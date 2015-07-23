@@ -1,9 +1,9 @@
 \chapter{Análise de Trabalhos Relacionados}
 \label{ch:analise}
 
-NIDS baseado em anomalia tem se mostrado uma área de estudo promissora, mas ainda necessita de bastante pesquisa.
-Analisando os dados de 55 artigos apresentados em \cite{tsai09}, publicados entre os anos 2000 e 2007,
-é possível extrair algumas inferências sobre as diferentes técnicas utilizadas.
+NIDS baseado em anomalia tem se mostrado uma área de estudo promissora, mas ainda possui grande margem para pesquisa e melhorias.
+A fim de analisar o estado da arte, considerei o estudo feito em \cite{tsai09}, que traz dados de 55 artigos publicados
+entre os anos 2000 e 2007. A partir dessa análise, pude extrair algumas inferências sobre as diferentes técnicas utilizadas.
 \begin{itemize}
     \item  26 se baseiam no uso de classificadores unitários, apesar de que o uso de
     classificadores híbridos tem aumentado durante os últimos anos.
@@ -20,7 +20,7 @@ por \cite{tsai09} utilizava tal técnica, em 2007 foi o caso de 9 dentre 11. Ou 
     bases KDD Cup 99 (30) e DARPA 1998 (18).
 \end{itemize}
 
-\par Quanto aos dados, as técnicas pioneiras costumavam criar modelos considerando todo o corpo do pacote . Entretanto,
+\par Quanto aos dados, as técnicas pioneiras costumavam criar modelos considerando todo o corpo do pacote. Entretanto,
 eles separavam as instâncias com base no tamanho do pacote e portas de destino, diminuindo o contexto de cada modelo.
 Técnicas posteriores levam em consideração partes específicas do conteúdo do pacote. Aparentemente, anomalias mais
 sutis podem ser detectadas a uma taxa menor de Falso Positivo quando usando um contexto mais específico.
@@ -36,7 +36,7 @@ inicial aleatória. A solução é atualizada a cada iteração do algoritmo. En
 são utilizados Support Vector Machine (SVM) e Simulated Annealing (SA) para selecionar o melhor conjunto de
 características. Por conseguinte, Árvore de Decisão e SA são usados para aumentar a precisão do teste e construir
 regras de decisão. No final, a melhor precisão e as melhores características e regras de decisão são anunciadas.
-\par Nos testes descritos no  artigo, após a seleção de atributos, foram utilizados 23 durante o processo de
+\par Nos testes descritos no  artigo, após a seleção de atributos, foram utilizadas 23 características durante o processo de
 classificação. O algoritmo conseguiu atingir uma precisão de 99,6\%, o que representa um grande ganho quando comparado
  a outros resultados até o momento.
 
