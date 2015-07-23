@@ -5,7 +5,7 @@ Ao longo da última década, a realidade da comunicação em rede entre computad
 para uma grande parcela da população, deixando de servir apenas para compartilhamento de websites.
 Tornou-se um completo ambiente utilizado por cidadãos para armazenamento de arquivos pessoais na núvem;
 por bancos para efetuar transações monetárias; e por governos para trocas de informações preciosas.
-Assim como é possível se conectar de uma máquina pessoal a um servidor \textit{web}, é possível fazer o contrário.
+Assim como é possível se conectar de uma máquina pessoal a um servidor \textit{web}, é possível fazer o contrário \cite{tsai09}.
 Qualquer máquina conectada a uma rede está teoricamente sujeita ao acesso de fora.
 Roteadores e sistemas operacionais atuais estão equipados com ferramentas básicas para previnir acesso não autorizado
 ao computador \cite{hongjuan10}. Ainda assim, há pessoas dedicadas a burlar tais proteções. Alguns desses invasores conseguem copiar
@@ -16,12 +16,12 @@ No meio acadêmico, muitos artigos foram publicados explorando algoritmos de \em
 \par Existem diversos tipos de ataques e diferentes protocolos de comunicação, mas a tarefa de se detectar uma
 intrusão pode ser simplificada em um problema de classificação binária do comportamento do sistema, onde os dois
 possíveis resultados seriam "normal" ou "intrusivo". Existem duas "escolas de pensamento" bem definidas no meio
-acadêmico acerca do assunto:
+acadêmico acerca do assunto \cite{tsai09}:
 \begin{enumerate}
     \item \textit{Signature-based} (baseado em assinatura) -- Esse é o método padrão e atualmente o único utilizado
-    comercialmente. Ele possui baixa adaptabilidade a novas ameaças.
+    comercialmente. Ele possui baixa adaptabilidade a novas ameaças \cite{davis11}.
     \item \textit{Anomaly-based} (baseado em anomalia) -- Ainda uma área de estudo, possui alta taxa de
-    Falso Positivo, mas boa adaptabilidade e será o foco deste trabalho.
+    Falso Positivo \cite{catania12}, mas boa adaptabilidade e será o foco deste trabalho.
 \end{enumerate}
 \par Nesta monografia, farei um estudo sobre os Sistemas de Detecção de Intrusão em Rede baseados em Anomalia, aos quais
  vou me referir pela sigla em inglês A-NIDS \footnote{Anomaly-based Network Intrusion Detection Systems} por questão de
